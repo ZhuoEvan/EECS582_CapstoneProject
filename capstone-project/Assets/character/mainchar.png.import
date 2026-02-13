@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://digh0c8q85wa2"
-path="res://.godot/imported/PizzaRat.jpg-95df7846b7986e6c8444421d3f4de49c.ctex"
+uid="uid://ddbxirj2p5hik"
+path="res://.godot/imported/mainchar.png-a94fffed323d4aa230bee6fc95410245.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/PizzaRat.jpg"
-dest_files=["res://.godot/imported/PizzaRat.jpg-95df7846b7986e6c8444421d3f4de49c.ctex"]
+source_file="res://Assets/character/mainchar.png"
+dest_files=["res://.godot/imported/mainchar.png-a94fffed323d4aa230bee6fc95410245.ctex"]
 
 [params]
 
