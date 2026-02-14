@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://boi1m1go5cj17"]
+
+[ext_resource type="Texture2D" uid="uid://bb4d444lpf7w8" path="res://Assets/stage/Test_Stage.png" id="1_6eo5e"]
+
+[node name="Stage" type="Node2D" unique_id=804948163]
+
+[node name="Background" type="Node2D" parent="." unique_id=721010743]
+
+[node name="Sprite2D" type="Sprite2D" parent="Background" unique_id=1599158923]
+position = Vector2(0, -1)
+scale = Vector2(3.6, 3.7499998)
+texture = ExtResource("1_6eo5e")
+centered = false

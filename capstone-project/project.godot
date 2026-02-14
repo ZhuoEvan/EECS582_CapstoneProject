@@ -11,8 +11,18 @@ config_version=5
 [application]
 
 config/name="CapstoneProject"
+run/main_scene="uid://dqr2ymohqgddo"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=720
+window/size/viewport_height=240
+window/size/window_width_override=1000
+window/size/window_height_override=640
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
 
 [input]
 
@@ -51,4 +61,5 @@ ui_down={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"

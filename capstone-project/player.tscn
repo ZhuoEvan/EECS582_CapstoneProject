@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cu1vm8e6mkq7k"]
+
+[ext_resource type="PackedScene" uid="uid://ck8202b44sl2d" path="res://character.tscn" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://ddbxirj2p5hik" path="res://Assets/character/mainchar.png" id="2_i3pqv"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i3pqv"]
+radius = 3.0
+height = 32.0
+
+[node name="CharacterBody2D" unique_id=971702195 instance=ExtResource("1_onrkg")]
+position = Vector2(-1, 1)
+speed = 50.0
+
+[node name="Sprite2D" parent="." index="0" unique_id=1319192139]
+texture = ExtResource("2_i3pqv")
+centered = false
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=555727301]
+position = Vector2(21, 55)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_i3pqv")
