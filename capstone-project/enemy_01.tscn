@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b081kochruapc" path="res://Assets/character/Enemy1.png" id="2_t7m7e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hdsgg"]
-radius = 16.0
+radius = 25.0
 height = 72.0
 
 [node name="Enemy01" unique_id=971702195 instance=ExtResource("1_hdsgg")]

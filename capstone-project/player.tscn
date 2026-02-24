@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://ddbxirj2p5hik" path="res://Assets/character/mainchar.png" id="2_i3pqv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
-radius = 7.995762
-height = 35.655342
+radius = 19.055042
+height = 46.04073
 
 [sub_resource type="Animation" id="Animation_onrkg"]
 length = 0.001
@@ -25,11 +25,12 @@ position = Vector2(-1, 1)
 speed = 50.0
 
 [node name="Sprite2D" parent="." index="0" unique_id=1319192139]
+position = Vector2(-24, -37)
 texture = ExtResource("2_i3pqv")
 centered = false
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=555727301]
-position = Vector2(23.999998, 36)
+position = Vector2(1.0000001, -1)
 rotation = -0.03256333
 shape = SubResource("CapsuleShape2D_onrkg")
 

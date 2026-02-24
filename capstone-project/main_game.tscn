@@ -10,11 +10,11 @@
 [node name="Stage" parent="." unique_id=804948163 instance=ExtResource("1_1oj5k")]
 
 [node name="CharacterBody2D" parent="Stage" unique_id=971702195 groups=["player"] instance=ExtResource("2_yx7mw")]
-position = Vector2(19, 101)
+position = Vector2(24, 129)
 health = 0
 
 [node name="Enemy01" parent="Stage" unique_id=1791732659 instance=ExtResource("3_ykeeq")]
-position = Vector2(574.2897, 137.00099)
+position = Vector2(575, 139)
 script = ExtResource("4_6bm6p")
 damage = 10
 speed = 65.0
