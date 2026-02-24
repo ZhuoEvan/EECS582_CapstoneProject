@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://ck8202b44sl2d" path="res://character.tscn" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://ddbxirj2p5hik" path="res://Assets/character/mainchar.png" id="2_i3pqv"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i3pqv"]
-radius = 3.0
-height = 32.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
+radius = 7.995762
+height = 35.655342
 
 [sub_resource type="Animation" id="Animation_onrkg"]
 length = 0.001
@@ -29,9 +29,9 @@ texture = ExtResource("2_i3pqv")
 centered = false
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=555727301]
-position = Vector2(21, 55)
-rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_i3pqv")
+position = Vector2(23.999998, 36)
+rotation = -0.03256333
+shape = SubResource("CapsuleShape2D_onrkg")
 
 [node name="AnimationPlayer" parent="." index="2" unique_id=470995652]
 libraries/ = SubResource("AnimationLibrary_hqtel")

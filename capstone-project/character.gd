@@ -1,3 +1,15 @@
+# ============================================= #
+# Prologue Comment
+#Name: Player movement/attack script
+#Description: This .gd script provide the movement, attack and nessary information(health, damage, etc.) for the player characterr
+#Authors: Zhang,
+#creation date: 2/9/26
+#last modifed date:2/23/26
+#changes: added temp value for speed, put player in a group in order to be trackable by the enemy(Zhang)
+#Preconditon: accetable button: W,A,S,D, right click, and left click
+#Postcondition: Player will be able to move, and deal damage to enemy
+# ============================================= #
+
 extends CharacterBody2D
 
 # ============================================= #
@@ -5,7 +17,7 @@ extends CharacterBody2D
 # ============================================= #
 @export var health : int
 @export var damage : int
-@export var speed : float
+@export var speed : float = 70.0
 
 # ============================================= #
 # State											#
