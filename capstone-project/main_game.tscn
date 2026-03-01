@@ -1,22 +1,42 @@
 [gd_scene format=3 uid="uid://dqr2ymohqgddo"]
 
 [ext_resource type="PackedScene" uid="uid://boi1m1go5cj17" path="res://stage.tscn" id="1_1oj5k"]
+[ext_resource type="Script" uid="uid://bjvd0s0p1qa0c" path="res://main_game.gd" id="1_dugkq"]
 [ext_resource type="PackedScene" uid="uid://cu1vm8e6mkq7k" path="res://player.tscn" id="2_yx7mw"]
 [ext_resource type="PackedScene" uid="uid://cxyuw0ov27lt0" path="res://enemy_01.tscn" id="3_ykeeq"]
 [ext_resource type="Script" uid="uid://bufl4kcu1murd" path="res://enemy_01.gd" id="4_6bm6p"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dugkq"]
+size = Vector2(9, 250)
+
 [node name="MainGame" type="Node2D" unique_id=1094458621]
+script = ExtResource("1_dugkq")
 
 [node name="Stage" parent="." unique_id=804948163 instance=ExtResource("1_1oj5k")]
+position = Vector2(0, 1)
 
-[node name="CharacterBody2D" parent="Stage" unique_id=971702195 groups=["player"] instance=ExtResource("2_yx7mw")]
-position = Vector2(24, 129)
-health = 0
+[node name="Player" parent="." unique_id=971702195 groups=["player"] instance=ExtResource("2_yx7mw")]
+position = Vector2(203, 159)
 
-[node name="Enemy01" parent="Stage" unique_id=1791732659 instance=ExtResource("3_ykeeq")]
+[node name="Enemy01" parent="." unique_id=1791732659 instance=ExtResource("3_ykeeq")]
 position = Vector2(575, 139)
+collision_layer = 1
+collision_mask = 1
 script = ExtResource("4_6bm6p")
 damage = 10
 speed = 65.0
 attack_range = 3.0
 attack_cooldown = 1.0
+
+[node name="Camera" type="Camera2D" parent="." unique_id=2107624244]
+position = Vector2(360, 120)
+
+[node name="InvisibleWalls" type="Node2D" parent="Camera" unique_id=1640340261]
+position = Vector2(-360, -120)
+
+[node name="LeftWall" type="StaticBody2D" parent="Camera/InvisibleWalls" unique_id=760962970]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera/InvisibleWalls/LeftWall" unique_id=1766902007]
+position = Vector2(4, 125)
+shape = SubResource("RectangleShape2D_dugkq")

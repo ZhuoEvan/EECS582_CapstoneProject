@@ -2,6 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://bb4d444lpf7w8" path="res://Assets/stage/Test_Stage.png" id="1_6eo5e"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6eo5e"]
+size = Vector2(721, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aees8"]
+size = Vector2(20, 169)
+
 [node name="Stage" type="Node2D" unique_id=804948163]
 
 [node name="Background" type="Node2D" parent="." unique_id=721010743]
@@ -11,3 +17,29 @@ position = Vector2(0, -1)
 scale = Vector2(3.6, 3.7499998)
 texture = ExtResource("1_6eo5e")
 centered = false
+
+[node name="WorldColliders" type="Node2D" parent="." unique_id=693956406]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldColliders" unique_id=52301083]
+position = Vector2(2, 94)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldColliders/StaticBody2D" unique_id=542809687]
+position = Vector2(360, 12)
+shape = SubResource("RectangleShape2D_6eo5e")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="WorldColliders" unique_id=1563844900]
+position = Vector2(-72, 148)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldColliders/StaticBody2D3" unique_id=1729880483]
+position = Vector2(64, 31.5)
+shape = SubResource("RectangleShape2D_aees8")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="WorldColliders" unique_id=131581971]
+position = Vector2(0, 240)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldColliders/StaticBody2D2" unique_id=1587304990]
+position = Vector2(360, 12)
+shape = SubResource("RectangleShape2D_6eo5e")
