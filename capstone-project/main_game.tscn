@@ -4,9 +4,10 @@
 [ext_resource type="Script" uid="uid://bjvd0s0p1qa0c" path="res://main_game.gd" id="1_dugkq"]
 [ext_resource type="PackedScene" uid="uid://cu1vm8e6mkq7k" path="res://player.tscn" id="2_yx7mw"]
 [ext_resource type="PackedScene" uid="uid://cxyuw0ov27lt0" path="res://enemy_01.tscn" id="3_ykeeq"]
+[ext_resource type="Script" uid="uid://bufl4kcu1murd" path="res://enemy_01.gd" id="4_6bm6p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dugkq"]
-size = Vector2(11, 250)
+size = Vector2(9, 250)
 
 [node name="MainGame" type="Node2D" unique_id=1094458621]
 script = ExtResource("1_dugkq")
@@ -32,12 +33,13 @@ y_sort_enabled = true
 
 [node name="Enemy01" parent="ActorsContainer" unique_id=1791732659 instance=ExtResource("3_ykeeq")]
 y_sort_enabled = false
-position = Vector2(650, -55)
+position = Vector2(423, -75.00001)
+scale = Vector2(0.7, 0.7)
 collision_layer = 6
 script = ExtResource("4_6bm6p")
 attack_range = 3.0
 attack_cooldown = 1.0
 
 [node name="Player" parent="ActorsContainer" unique_id=971702195 groups=["player"] instance=ExtResource("2_yx7mw")]
-position = Vector2(59, -45)
+position = Vector2(37, -41)
 collision_mask = 13

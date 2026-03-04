@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://gf3jshjhwlpd" path="res://Assets/stage/Stage1.png" id="1_6eo5e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6eo5e"]
-size = Vector2(2879.625, 24)
+size = Vector2(2159.5, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aees8"]
 size = Vector2(20, 169)
@@ -25,7 +25,7 @@ position = Vector2(2, 94)
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldColliders/StaticBody2D" unique_id=542809687]
-position = Vector2(718.125, 12)
+position = Vector2(1079.25, 12)
 shape = SubResource("RectangleShape2D_6eo5e")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="WorldColliders" unique_id=1563844900]
@@ -41,5 +41,5 @@ position = Vector2(0, 240)
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldColliders/StaticBody2D2" unique_id=1587304990]
-position = Vector2(1081.1875, 12)
+position = Vector2(1078, 10)
 shape = SubResource("RectangleShape2D_6eo5e")

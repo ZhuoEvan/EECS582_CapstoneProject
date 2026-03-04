@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dl15o3njtposd"
-path="res://.godot/imported/mainchar_fighting.png-9fd920861dd2c76a9b6142defffe6644.ctex"
+uid="uid://cf1kk67dvnjv4"
+path="res://.godot/imported/mainchar_walking.png-6e285fe8d76c71300f06dcccd54e6b3c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/character/mainchar_fighting.png"
-dest_files=["res://.godot/imported/mainchar_fighting.png-9fd920861dd2c76a9b6142defffe6644.ctex"]
+source_file="res://Assets/mainchar_walking.png"
+dest_files=["res://.godot/imported/mainchar_walking.png-6e285fe8d76c71300f06dcccd54e6b3c.ctex"]
 
 [params]
 

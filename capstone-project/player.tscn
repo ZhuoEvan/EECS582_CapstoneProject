@@ -5,65 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://basn4rlsk2yjc" path="res://Assets/character/combined-main.png" id="2_onrkg"]
 [ext_resource type="PackedScene" uid="uid://dxqthvs45roa5" path="res://damage_emitter.tscn" id="3_i3pqv"]
 
-[sub_resource type="Animation" id="Animation_4srsv"]
-resource_name = "Attack"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterSprite:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"attack_01"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterSprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.050938025, 0.10000001, 0.15053327, 0.20000002, 0.2501285, 0.3, 0.34972376),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
-}
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
+radius = 5.0
+height = 32.0
 
-[sub_resource type="Animation" id="Animation_02kkc"]
-resource_name = "Default"
-length = 0.6
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterSprite:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"default"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterSprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 1]
-}
-
-[sub_resource type="Animation" id="Animation_l5ukw"]
+[sub_resource type="Animation" id="Animation_onrkg"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -145,7 +91,7 @@ tracks/0/keys = {
 "values": [12, 13, 14, 15, 16, 17]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_aomqu"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hqtel"]
 _data = {
 &"RESET": SubResource("Animation_onrkg"),
 &"idle": SubResource("Animation_hqtel"),

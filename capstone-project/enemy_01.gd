@@ -4,7 +4,7 @@ extends Character
 # Prologue Comment
 #Name: Enemy movement/attack script
 #Description: This .gd script provide the movement, attack and nessary information(health, damage, etc.) for the ebnemy characterr
-#Authors: Zhang, Evan
+#Authors: Zhang
 #creation date: 2/23/26
 #changes: created a basic enemy script where it will track and attack the player
 #Preconditon: player exist in the scene
