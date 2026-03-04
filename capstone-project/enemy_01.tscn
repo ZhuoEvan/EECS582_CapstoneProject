@@ -75,7 +75,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r81cn"]
 _data = {
 &"RESET": SubResource("Animation_hdsgg"),
-&"default": SubResource("Animation_t7m7e"),
+&"idle": SubResource("Animation_t7m7e"),
 &"light_attack": SubResource("Animation_r81cn"),
 &"walk": SubResource("Animation_ayrpq")
 }
@@ -100,4 +100,3 @@ shape = SubResource("CapsuleShape2D_hdsgg")
 
 [node name="AnimationPlayer" parent="." index="2" unique_id=470995652]
 libraries/ = SubResource("AnimationLibrary_r81cn")
-autoplay = &"default"

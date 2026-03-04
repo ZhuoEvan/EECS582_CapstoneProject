@@ -26,7 +26,8 @@ extends Character
 # ===================================================== #
 #Statistical Values
 @export var attack_range : float = 3.0
-@export var attack_cooldown : float = 1.0
+@export var attack_cooldown : float = 1000.0
+@export var attack_duration : float = 0.35
 
 #Reference Values
 var player : Node2D #reference for player node
@@ -58,7 +59,7 @@ func _physics_process(delta: float) -> void:
 			move_toward_player()
 			#else change state and start to attack the player
 		else:
-			start_attack()
+			enemy_attack()
 	
 	#Handle Enemy Movement
 	handle_animations()
@@ -77,32 +78,50 @@ func handle_input() -> void:
 func move_toward_player() -> void:
 	#Calculate direction vector from enemy to player
 	var direction = (player.global_position - global_position).normalized()
-	velocity = direction * speed #Set velocity toward player
+	velocity = direction * (speed * 0.75) #Set velocity toward player
 	state = State.WALK #change state to walk
+
+#Idle Movement Method
+func enemy_idle() -> void:
+	#Set State to IDLE
+	state = State.IDLE
+	await get_tree().create_timer(attack_cooldown).timeout
+	can_attack_flag = true 
 
 
 # =====[Section 05]==================================== #
 # ATTACK METHODS										#
 # ===================================================== #
 #Attack Method
-func start_attack() -> void:
-	#only attack if cooldown allows
+func enemy_attack() -> void:
 	if can_attack_flag:
-		state = State.ATTACK #change stat to attack
-		velocity = Vector2.ZERO #stop movement
-		perform_attack() #attack the player
+		state = State.ATTACK
+		velocity = Vector2.ZERO
+		can_attack_flag = false
+		await get_tree().create_timer(attack_duration).timeout
+		print("Enemy attacks player!")
+		enemy_idle()
+	
+'''func start_attack() -> void:
+	state = State.ATTACK #change state to attack
+	can_attack_flag = false
+	await get_tree().create_timer(attack_duration).timeout
+	state = State.IDLE
+	velocity = Vector2.ZERO #stop movement
+	perform_attack() #attack the player
 
 #Damage Deal Method
 func perform_attack() -> void:
 	print("Enemy attacks player!")
+	
 	#Currently comment out since player has not have a take damage method in script, it should work if implemented
 	#if player.has_method("take_damage"):
 		#player.take_damage(damage)
 	#set the attack flag to false
-	can_attack_flag = false
+
+	#return to idle state to loop again
+	#state = State.IDLE
 	#get the colddown timer based on the enemy attack cool_down and wait
 	await get_tree().create_timer(attack_cooldown).timeout
 	#set it attack flag to true after timer expire
-	can_attack_flag = true
-	#return to idle state to loop again
-	state = State.IDLE
+	can_attack_flag = true'''
