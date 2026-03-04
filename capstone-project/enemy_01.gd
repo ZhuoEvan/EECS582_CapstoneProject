@@ -26,8 +26,10 @@ extends Character
 # ===================================================== #
 #Statistical Values
 @export var attack_range : float = 3.0
-@export var attack_cooldown : float = 1000.0
+@export var attack_cooldown : float = 1.0
 @export var attack_duration : float = 0.35
+@export var fatigue_meter : float
+@export var fatigued : bool
 
 #Reference Values
 var player : Node2D #reference for player node
@@ -53,7 +55,7 @@ func _physics_process(delta: float) -> void:
 	#calculate the distance between enemy and player
 	var distance_to_player = global_position.distance_to(player.global_position)
 	#If enemy is not currently attacking
-	if state != State.ATTACK:
+	if (state != State.ATTACK) && !(fatigued):
 		#check if it within attack range, if not, move toward player
 		if distance_to_player > attack_range:
 			move_toward_player()
@@ -65,6 +67,7 @@ func _physics_process(delta: float) -> void:
 	handle_animations()
 	flip_sprites()
 	move_and_slide()
+	max_fatigue()
 
 #Passes parent method.
 func handle_input() -> void:
@@ -79,6 +82,7 @@ func move_toward_player() -> void:
 	#Calculate direction vector from enemy to player
 	var direction = (player.global_position - global_position).normalized()
 	velocity = direction * (speed * 0.75) #Set velocity toward player
+	fatigue_meter += 0.001
 	state = State.WALK #change state to walk
 
 #Idle Movement Method
@@ -87,6 +91,18 @@ func enemy_idle() -> void:
 	state = State.IDLE
 	await get_tree().create_timer(attack_cooldown).timeout
 	can_attack_flag = true 
+	
+#Fatigue Method
+func max_fatigue() -> void:
+	if fatigue_meter >= 1 && !(fatigued):
+		#Force no movement after max fatigue
+		fatigued = true
+		state = State.IDLE
+		velocity = Vector2.ZERO
+		await get_tree().create_timer(1).timeout #TBD: change value in future
+		#Reset Fatigue Meter
+		fatigued = false
+		fatigue_meter = 0
 
 
 # =====[Section 05]==================================== #
@@ -100,6 +116,7 @@ func enemy_attack() -> void:
 		can_attack_flag = false
 		await get_tree().create_timer(attack_duration).timeout
 		print("Enemy attacks player!")
+		fatigue_meter += 1
 		enemy_idle()
 	
 '''func start_attack() -> void:
