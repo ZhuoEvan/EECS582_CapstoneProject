@@ -8,15 +8,18 @@ radius = 8.0
 height = 52.0
 
 [node name="Enemy01" unique_id=971702195 instance=ExtResource("1_hdsgg")]
+y_sort_enabled = true
 collision_layer = 4
 collision_mask = 8
-health = 0
+speed = 50.0
 
 [node name="Sprite2D" parent="." index="0" unique_id=1319192139]
-position = Vector2(0, -14)
+position = Vector2(0, -36)
 texture = ExtResource("2_t7m7e")
+hframes = 5
+vframes = 5
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=555727301]
-position = Vector2(6, 13)
+position = Vector2(4, -8)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_hdsgg")
