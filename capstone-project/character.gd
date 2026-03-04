@@ -1,38 +1,47 @@
-# ============================================= #
-# Prologue Comment
-#Name: Character movement/attack script
-#Description: This .gd script provide the movement, attack and nessary information(health, damage, etc.) for the charactersr
-#Authors: Zhang, Jace
-#creation date: 2/9/26
-#last modifed date:3/4/26
-#changes: Animations and smoothed movement (Jace)
-#Preconditon: accetable button: W,A,S,D, right click, and left click
-#Postcondition: Player will be able to move, and deal damage to enemy
-# ============================================= #
+# =====[Section 01]==================================== #
+# (Prologue Comment)									#
+# File Name: character.gd								#
+# Description: Handles movement, attack, and neccessary #
+#			   information (health, damage, etc.) for 	#
+#			   characters								#
+# Authors: Zhang, Jace, Evan							#
+# Preconditon: 											#
+# 	Acceptable button: W,A,S,D, Left & Right Click		#
+# Postcondition: 										#
+# 	Player will be able to move, and deal damage to 	#
+#	enemy												#
+# Creation date: 02/09/26								#
+# ----------------------------------------------------- #
+# Last modifed date:03/04/26							#
+# Changes: 												#
+#	Organized Code (Evan)
+# ===================================================== #
 
+#Class Declaration & Class Connection
 class_name Character
 extends CharacterBody2D
 
-# ============================================= #
-# STATISTIC VARIABLES							#
-# ============================================= #
+
+# =====[Section 02]==================================== #
+# GLOBAL VARIABLES										#
+# ===================================================== #
+#Statistical Values
 @export var health : int
 @export var damage : int
 @export var speed : float
 
+#Child Variables
 @onready var animation_player := $AnimationPlayer
 @onready var character_sprite := $Sprite2D
 
-# ============================================= #
-# State											#
-# ============================================= #
+#Character State
 enum State { IDLE, WALK, ATTACK }
 var state: State = State.IDLE
 
-# ============================================= #
-# Methods										#
-# ============================================= #
 
+# =====[Section 03]==================================== #
+# INITIAL METHODS										#
+# ===================================================== #
 #Process Method
 func _physics_process(_delta: float) -> void:
 	handle_input()
@@ -46,6 +55,10 @@ func _physics_process(_delta: float) -> void:
 func handle_input() -> void:
 	pass
 
+
+# =====[Section 04]==================================== #
+# MOVEMENT METHODS										#
+# ===================================================== #
 #Handling Movement Input Method
 func handle_movement() -> void:
 	if can_move():
@@ -56,10 +69,28 @@ func handle_movement() -> void:
 	else:
 		velocity = Vector2.ZERO
 
+#Move Condition Helper Method
+# Checks if character can move.
+func can_move() -> bool:
+	return state == State.IDLE or state == State.WALK
+
+
+# =====[Section 05]==================================== #
+# ATTACK METHODS										#
+# ===================================================== #
 #Attack Condition Helper Method
 func can_attack() -> bool:
 	return state == State.IDLE or state == State.WALK
-	
+
+#Revert to Idle State Method
+# Changes state back to IDLE.
+func on_action_complete() -> void:
+	state = State.IDLE
+
+
+# =====[Section 06]==================================== #
+# ANIMATION METHODS										#
+# ===================================================== #
 # Animation Selector Helper Method
 func handle_animations() -> void:
 	if state == State.IDLE:
@@ -69,17 +100,10 @@ func handle_animations() -> void:
 	elif state == State.ATTACK:
 		animation_player.play("light_attack")
 
+#Sprite Flip Method
 #Flips the sprites to correct facing direction.
 func flip_sprites() -> void:
 	if velocity.x > 0:
 		character_sprite.flip_h = false
 	elif velocity.x < 0:
 		character_sprite.flip_h = true
-
-# Checks if character can move.
-func can_move() -> bool:
-	return state == State.IDLE or state == State.WALK
-
-# Changes state back to IDLE.
-func on_action_complete() -> void:
-	state = State.IDLE

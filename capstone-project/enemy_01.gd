@@ -1,25 +1,42 @@
+# =====[Section 01]==================================== #
+# (Prologue Comment)									#
+# File Name: enemy_01.gd								#
+# Description: Handles movement, attack, and neccessary #
+#			   information (health, damage, etc.) for 	#
+#			   specifically enemy						#
+# Authors: Zhang, Jace, Evan							#
+# Preconditon: 											#
+# 	Player Entity Exist									#
+# Postcondition: 										#
+# 	Track Player & Attempts to Damage Player			#
+# Creation date: 02/23/26								#
+# ----------------------------------------------------- #
+# Last modifed date:03/04/26							#
+# Changes: 												#
+#	Organized Code (Evan)
+# ===================================================== #
+
+#Class Declaration & Class Connection
 class_name Enemy1
 extends Character
-# ============================================= #
-# Prologue Comment
-#Name: Enemy movement/attack script
-#Description: This .gd script provide the movement, attack and nessary information(health, damage, etc.) for the ebnemy characterr
-#Authors: Zhang
-#creation date: 2/23/26
-#changes: created a basic enemy script where it will track and attack the player
-#Preconditon: player exist in the scene
-#Postcondition: follow player and attempt to attack
-# ============================================= #
 
+
+# =====[Section 02]==================================== #
+# GLOBAL VARIABLES										#
+# ===================================================== #
+#Statistical Values
 @export var attack_range : float = 3.0
 @export var attack_cooldown : float = 1.0
 
-#reference for player node
-var player : Node2D
-#flag to make sure enemy can't continous attack
-var can_attack_flag := true
+#Reference Values
+var player : Node2D #reference for player node
+var can_attack_flag := true #flag to prevent stunlocking
 
-#ready function
+
+# =====[Section 03]==================================== #
+# INITIAL METHODS										#
+# ===================================================== #
+#Ready Method
 func _ready() -> void:
 	#Find the first node in the scene that belongs to the group "player"
 	player = get_tree().get_first_node_in_group("player")
@@ -27,7 +44,7 @@ func _ready() -> void:
 	if player == null:
 		push_error("No player found in group 'player'")
 
-#physic process for enemy
+#Process Method
 func _physics_process(delta: float) -> void:
 	#if player not found, dont do anything
 	if player == null:
@@ -42,31 +59,40 @@ func _physics_process(delta: float) -> void:
 			#else change state and start to attack the player
 		else:
 			start_attack()
-	#apply movement 
+	
+	#Handle Enemy Movement
+	handle_animations()
 	flip_sprites()
 	move_and_slide()
-	
-#movement function
+
+#Passes parent method.
+func handle_input() -> void:
+	pass
+
+
+# =====[Section 04]==================================== #
+# MOVEMENT METHODS										#
+# ===================================================== #
+#Track Player Movement Method
 func move_toward_player() -> void:
 	#Calculate direction vector from enemy to player
 	var direction = (player.global_position - global_position).normalized()
-	#Set velocity toward player
-	velocity = direction * speed
-	#change state to walk
-	state = State.WALK
+	velocity = direction * speed #Set velocity toward player
+	state = State.WALK #change state to walk
 
-#start attack function
+
+# =====[Section 05]==================================== #
+# ATTACK METHODS										#
+# ===================================================== #
+#Attack Method
 func start_attack() -> void:
-	#only attack if cooldown alloes
+	#only attack if cooldown allows
 	if can_attack_flag:
-		#change stat to attack
-		state = State.ATTACK
-		#stop movement
-		velocity = Vector2.ZERO
-		#attack the player
-		perform_attack()
+		state = State.ATTACK #change stat to attack
+		velocity = Vector2.ZERO #stop movement
+		perform_attack() #attack the player
 
-#just a function to print out that enemy attack player
+#Damage Deal Method
 func perform_attack() -> void:
 	print("Enemy attacks player!")
 	#Currently comment out since player has not have a take damage method in script, it should work if implemented
@@ -80,7 +106,3 @@ func perform_attack() -> void:
 	can_attack_flag = true
 	#return to idle state to loop again
 	state = State.IDLE
-	
-#Passes parent method.
-func handle_input() -> void:
-	pass
