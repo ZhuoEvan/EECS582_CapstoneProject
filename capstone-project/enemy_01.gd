@@ -1,4 +1,5 @@
-extends CharacterBody2D
+class_name Enemy1
+extends Character
 # ============================================= #
 # Prologue Comment
 #Name: Enemy movement/attack script
@@ -10,19 +11,9 @@ extends CharacterBody2D
 #Postcondition: follow player and attempt to attack
 # ============================================= #
 
-#tempoary value for the enemy
-@export var health : int = 100
-@export var damage : int = 10
-@export var speed : float = 65.0
 @export var attack_range : float = 3.0
 @export var attack_cooldown : float = 1.0
 
-@onready var animation_player := $AnimationPlayer
-@onready var character_sprite := $CharacterSprite
-
-#state for the enemy
-enum State { IDLE, WALK, ATTACK }
-var state: State = State.IDLE
 #reference for player node
 var player : Node2D
 #flag to make sure enemy can't continous attack
@@ -51,9 +42,8 @@ func _physics_process(delta: float) -> void:
 			#else change state and start to attack the player
 		else:
 			start_attack()
-	#apply movement
-	handle_animation()
-	flip_sprite()
+	#apply movement 
+	flip_sprites()
 	move_and_slide()
 	
 #movement function
@@ -64,6 +54,7 @@ func move_toward_player() -> void:
 	velocity = direction * speed
 	#change state to walk
 	state = State.WALK
+
 #start attack function
 func start_attack() -> void:
 	#only attack if cooldown alloes
@@ -74,7 +65,7 @@ func start_attack() -> void:
 		velocity = Vector2.ZERO
 		#attack the player
 		perform_attack()
-		
+
 #just a function to print out that enemy attack player
 func perform_attack() -> void:
 	print("Enemy attacks player!")
@@ -89,22 +80,7 @@ func perform_attack() -> void:
 	can_attack_flag = true
 	#return to idle state to loop again
 	state = State.IDLE
-
-# ============================== #
-# Animation & Movement Methods	 #	
-# ============================== #
-#Handling Animation Method
-func handle_animation() -> void:
-	if state == State.IDLE:
-		animation_player.play("Default")
-	elif state == State.WALK:
-		animation_player.play("Walk")
-	elif state == State.ATTACK:
-		animation_player.play("Attack")
-
-#Flip Sprite Method
-func flip_sprite() -> void:
-	if velocity.x > 0:
-		character_sprite.flip_h = false
-	elif velocity.x < 0:
-		character_sprite.flip_h = true
+	
+#Passes parent method.
+func handle_input() -> void:
+	pass

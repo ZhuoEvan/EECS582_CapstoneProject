@@ -6,17 +6,16 @@
 [ext_resource type="PackedScene" uid="uid://cxyuw0ov27lt0" path="res://enemy_01.tscn" id="3_ykeeq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dugkq"]
-size = Vector2(9, 250)
+size = Vector2(11, 250)
 
 [node name="MainGame" type="Node2D" unique_id=1094458621]
 script = ExtResource("1_dugkq")
 
 [node name="Stage" parent="." unique_id=804948163 instance=ExtResource("1_1oj5k")]
-position = Vector2(0, 1)
+position = Vector2(0, -240)
 
 [node name="Camera" type="Camera2D" parent="." unique_id=2107624244]
-position = Vector2(360, 120)
-scale = Vector2(1e-05, 1e-05)
+position = Vector2(360, -121)
 
 [node name="InvisibleWalls" type="Node2D" parent="Camera" unique_id=1640340261]
 position = Vector2(-360, -120)
@@ -28,8 +27,17 @@ collision_mask = 0
 position = Vector2(4, 125)
 shape = SubResource("RectangleShape2D_dugkq")
 
-[node name="Enemy01" parent="." unique_id=1791732659 instance=ExtResource("3_ykeeq")]
-position = Vector2(575, 139)
+[node name="ActorsContainer" type="Node2D" parent="." unique_id=1781650201]
+y_sort_enabled = true
 
-[node name="Player" parent="." unique_id=110337084 groups=["player"] instance=ExtResource("2_yx7mw")]
-position = Vector2(42, 169)
+[node name="Enemy01" parent="ActorsContainer" unique_id=1791732659 instance=ExtResource("3_ykeeq")]
+y_sort_enabled = false
+position = Vector2(650, -55)
+collision_layer = 6
+script = ExtResource("4_6bm6p")
+attack_range = 3.0
+attack_cooldown = 1.0
+
+[node name="Player" parent="ActorsContainer" unique_id=971702195 groups=["player"] instance=ExtResource("2_yx7mw")]
+position = Vector2(59, -45)
+collision_mask = 13
