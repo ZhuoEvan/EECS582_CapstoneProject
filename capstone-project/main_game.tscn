@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://bjvd0s0p1qa0c" path="res://main_game.gd" id="1_dugkq"]
 [ext_resource type="PackedScene" uid="uid://cu1vm8e6mkq7k" path="res://player.tscn" id="2_yx7mw"]
 [ext_resource type="PackedScene" uid="uid://cxyuw0ov27lt0" path="res://enemy_01.tscn" id="3_ykeeq"]
-[ext_resource type="Script" uid="uid://bufl4kcu1murd" path="res://enemy_01.gd" id="4_6bm6p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dugkq"]
 size = Vector2(11, 250)

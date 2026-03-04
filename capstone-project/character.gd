@@ -23,6 +23,9 @@ extends CharacterBody2D
 @onready var animation_player := $AnimationPlayer
 @onready var character_sprite := $Sprite2D
 
+@onready var animation_player := $AnimationPlayer
+@onready var character_sprite := $CharacterSprite
+
 # ============================================= #
 # State											#
 # ============================================= #
@@ -45,6 +48,15 @@ func _physics_process(_delta: float) -> void:
 #Handling Input Method
 func handle_input() -> void:
 	pass
+
+#Handling Animation Method
+func handle_animations() -> void:
+	if state == State.IDLE:
+		animation_player.play("Default")
+	elif state == State.WALK:
+		animation_player.play("Walk")
+	elif state == State.ATTACK:
+		animation_player.play("Attack")
 
 #Handling Movement Input Method
 func handle_movement() -> void:

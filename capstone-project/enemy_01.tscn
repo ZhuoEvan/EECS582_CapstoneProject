@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cxyuw0ov27lt0"]
 
-[ext_resource type="PackedScene" uid="uid://ck8202b44sl2d" path="res://character.tscn" id="1_hdsgg"]
+[ext_resource type="Script" uid="uid://bufl4kcu1murd" path="res://enemy_01.gd" id="1_hdsgg"]
 [ext_resource type="Texture2D" uid="uid://b081kochruapc" path="res://Assets/character/Enemy1.png" id="2_t7m7e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hdsgg"]
@@ -23,3 +23,6 @@ vframes = 5
 position = Vector2(4, -8)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_hdsgg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=18268220]
+libraries/ = SubResource("AnimationLibrary_t7m7e")
