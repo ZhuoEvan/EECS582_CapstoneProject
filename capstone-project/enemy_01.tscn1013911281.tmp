@@ -28,10 +28,6 @@ _data = {
 scale = Vector2(0.68, 0.68)
 script = ExtResource("1_hdsgg")
 health = 0
-damage = null
-speed = null
-attack_range = null
-attack_cooldown = null
 
 [node name="CharacterSprite" type="Sprite2D" parent="." unique_id=2015282245]
 position = Vector2(0, -14)

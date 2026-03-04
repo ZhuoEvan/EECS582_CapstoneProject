@@ -3,7 +3,7 @@ extends CharacterBody2D
 # Prologue Comment
 #Name: Enemy movement/attack script
 #Description: This .gd script provide the movement, attack and nessary information(health, damage, etc.) for the ebnemy characterr
-#Authors: Zhang
+#Authors: Zhang, Evan
 #creation date: 2/23/26
 #changes: created a basic enemy script where it will track and attack the player
 #Preconditon: player exist in the scene
@@ -16,6 +16,9 @@ extends CharacterBody2D
 @export var speed : float = 65.0
 @export var attack_range : float = 3.0
 @export var attack_cooldown : float = 1.0
+
+@onready var animation_player := $AnimationPlayer
+@onready var character_sprite := $CharacterSprite
 
 #state for the enemy
 enum State { IDLE, WALK, ATTACK }
@@ -48,7 +51,9 @@ func _physics_process(delta: float) -> void:
 			#else change state and start to attack the player
 		else:
 			start_attack()
-	#apply movement 
+	#apply movement
+	handle_animation()
+	flip_sprite()
 	move_and_slide()
 	
 #movement function
@@ -69,6 +74,7 @@ func start_attack() -> void:
 		velocity = Vector2.ZERO
 		#attack the player
 		perform_attack()
+		
 #just a function to print out that enemy attack player
 func perform_attack() -> void:
 	print("Enemy attacks player!")
@@ -83,3 +89,22 @@ func perform_attack() -> void:
 	can_attack_flag = true
 	#return to idle state to loop again
 	state = State.IDLE
+
+# ============================== #
+# Animation & Movement Methods	 #	
+# ============================== #
+#Handling Animation Method
+func handle_animation() -> void:
+	if state == State.IDLE:
+		animation_player.play("Default")
+	elif state == State.WALK:
+		animation_player.play("Walk")
+	elif state == State.ATTACK:
+		animation_player.play("Attack")
+
+#Flip Sprite Method
+func flip_sprite() -> void:
+	if velocity.x > 0:
+		character_sprite.flip_h = false
+	elif velocity.x < 0:
+		character_sprite.flip_h = true

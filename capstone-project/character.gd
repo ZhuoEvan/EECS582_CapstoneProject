@@ -2,7 +2,7 @@
 # Prologue Comment
 #Name: Player movement/attack script
 #Description: This .gd script provide the movement, attack and nessary information(health, damage, etc.) for the player characterr
-#Authors: Zhang,
+#Authors: Zhang, 
 #creation date: 2/9/26
 #last modifed date:2/23/26
 #changes: added temp value for speed, put player in a group in order to be trackable by the enemy(Zhang)
@@ -18,6 +18,9 @@ extends CharacterBody2D
 @export var health : int
 @export var damage : int
 @export var speed : float = 70.0
+
+@onready var animation_player := $AnimationPlayer
+@onready var character_sprite := $CharacterSprite
 
 # ============================================= #
 # State											#
@@ -36,7 +39,9 @@ func _process(_delta: float) -> void:
 	handle_input()
 	if state != State.ATTACK:
 		handle_movement()
+	handle_animations()
 	handle_attacks()
+	flip_sprite()
 	move_and_slide()
 
 #Handling Input Method
@@ -52,6 +57,15 @@ func handle_input() -> void:
 		attack_type = "heavy_attack"
 		state = State.ATTACK
 
+#Handling Animation Method
+func handle_animations() -> void:
+	if state == State.IDLE:
+		animation_player.play("Default")
+	elif state == State.WALK:
+		animation_player.play("Walk")
+	elif state == State.ATTACK:
+		animation_player.play("Attack")
+
 #Handling Movement Input Method
 func handle_movement() -> void:
 	if velocity.length() == 0:
@@ -59,9 +73,17 @@ func handle_movement() -> void:
 	else:
 		state = State.WALK
 
+#Flip Sprite Method
+func flip_sprite() -> void:
+	if velocity.x > 0:
+		character_sprite.flip_h = false
+	elif velocity.x < 0:
+		character_sprite.flip_h = true
+		
 #Handling Attack Input Method
 func handle_attacks() -> void:
 	if state == State.ATTACK:
+		await get_tree().create_timer(0.4).timeout #Timer to Run Animation
 		print(attack_type)
 		state = State.IDLE
 
