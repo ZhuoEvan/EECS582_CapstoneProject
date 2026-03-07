@@ -37,8 +37,11 @@ position = Vector2(423, -75.00001)
 scale = Vector2(0.7, 0.7)
 collision_layer = 6
 script = ExtResource("4_6bm6p")
-attack_range = 3.0
-attack_cooldown = 1.0
+attack_range = 40.0
+attack_cooldown = 3.0
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
 
 [node name="Player" parent="ActorsContainer" unique_id=971702195 groups=["player"] instance=ExtResource("2_yx7mw")]
 position = Vector2(37, -41)

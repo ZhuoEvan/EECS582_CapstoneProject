@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://ck8202b44sl2d" path="res://character.tscn" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://8qwsusbndc48" path="res://player.gd" id="2_hqtel"]
 [ext_resource type="Texture2D" uid="uid://basn4rlsk2yjc" path="res://Assets/character/combined-main.png" id="2_onrkg"]
-[ext_resource type="PackedScene" uid="uid://dxqthvs45roa5" path="res://damage_emitter.tscn" id="3_i3pqv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
 radius = 5.0
@@ -22,6 +21,49 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DamageEmitter:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_2hs0m"]
+resource_name = "hurt"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.30034554, 0.35362622, 0.40206322, 0.4500158),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [15, 4, 15, 4, 15, 4, 15, 4, 15, 4]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_action_complete"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_hqtel"]
@@ -72,6 +114,18 @@ tracks/1/keys = {
 "method": &"on_action_complete"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DamageEmitter:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_sweqy"]
 resource_name = "walk"
@@ -94,15 +148,23 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hqtel"]
 _data = {
 &"RESET": SubResource("Animation_onrkg"),
+&"hurt": SubResource("Animation_2hs0m"),
 &"idle": SubResource("Animation_hqtel"),
 &"light_attack": SubResource("Animation_i3pqv"),
 &"walk": SubResource("Animation_sweqy")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i3pqv"]
+size = Vector2(19, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
+size = Vector2(28, 20)
+
 [node name="Player" unique_id=971702195 instance=ExtResource("1_onrkg")]
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("2_hqtel")
+damage = 4
 speed = 120.0
 
 [node name="Sprite2D" parent="." index="0" unique_id=1319192139]
@@ -121,6 +183,21 @@ shape = SubResource("CapsuleShape2D_onrkg")
 libraries/ = SubResource("AnimationLibrary_hqtel")
 autoplay = &"idle"
 
-[node name="DamageEmitter" parent="." index="3" unique_id=1434892928 instance=ExtResource("3_i3pqv")]
+[node name="DamageEmitter" parent="." index="3" unique_id=1434892928]
+position = Vector2(0, -32)
+collision_mask = 32
+
+[node name="CollisionShape2D" parent="DamageEmitter" index="0" unique_id=1173072616]
+position = Vector2(15.5, 0)
+shape = SubResource("RectangleShape2D_i3pqv")
+
+[node name="DamageReceiver" parent="." index="4" unique_id=1146848414]
+position = Vector2(-3, -35)
+collision_layer = 16
+
+[node name="CollisionShape2D" parent="DamageReceiver" index="0" unique_id=390845195]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_hqtel")
 
 [editable path="DamageEmitter"]
+[editable path="DamageReceiver"]

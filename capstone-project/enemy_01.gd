@@ -11,13 +11,13 @@
 # 	Track Player & Attempts to Damage Player			#
 # Creation date: 02/23/26								#
 # ----------------------------------------------------- #
-# Last modifed date:03/04/26							#
+# Last modifed date:03/07/26							#
 # Changes: 												#
-#	Organized Code (Evan)
+#	Added super calls to child methods.
 # ===================================================== #
 
 #Class Declaration & Class Connection
-class_name Enemy1
+class_name Enemy01
 extends Character
 
 
@@ -25,7 +25,7 @@ extends Character
 # GLOBAL VARIABLES										#
 # ===================================================== #
 #Statistical Values
-@export var attack_range : float = 3.0
+@export var attack_range : float = 40.0
 @export var attack_cooldown : float = 1.0
 @export var attack_duration : float = 0.35
 @export var fatigue_meter : float
@@ -41,12 +41,13 @@ var can_attack_flag := true #flag to prevent stunlocking
 # ===================================================== #
 #Ready Method
 func _ready() -> void:
+	super._ready()
 	#Find the first node in the scene that belongs to the group "player"
 	player = get_tree().get_first_node_in_group("player")
 	#a safety check if player was not found
 	if player == null:
 		push_error("No player found in group 'player'")
-
+	
 #Process Method
 func _physics_process(delta: float) -> void:
 	#if player not found, dont do anything
@@ -62,12 +63,7 @@ func _physics_process(delta: float) -> void:
 			#else change state and start to attack the player
 		else:
 			enemy_attack()
-	
-	#Handle Enemy Movement
-	handle_animations()
-	flip_sprites()
-	move_and_slide()
-	max_fatigue()
+	super._physics_process(delta)
 
 #Passes parent method.
 func handle_input() -> void:
@@ -119,7 +115,7 @@ func enemy_attack() -> void:
 		fatigue_meter += 1
 		enemy_idle()
 	
-'''func start_attack() -> void:
+func start_attack() -> void:
 	state = State.ATTACK #change state to attack
 	can_attack_flag = false
 	await get_tree().create_timer(attack_duration).timeout
@@ -141,4 +137,4 @@ func perform_attack() -> void:
 	#get the colddown timer based on the enemy attack cool_down and wait
 	await get_tree().create_timer(attack_cooldown).timeout
 	#set it attack flag to true after timer expire
-	can_attack_flag = true'''
+	can_attack_flag = true

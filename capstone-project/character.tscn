@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://ck8202b44sl2d"]
 
 [ext_resource type="Script" uid="uid://by838c0go0i1i" path="res://character.gd" id="1_glpr6"]
+[ext_resource type="PackedScene" uid="uid://dxqthvs45roa5" path="res://damage_emitter.tscn" id="2_pjt0s"]
+[ext_resource type="PackedScene" uid="uid://dqjsrryllb83p" path="res://damage_receiver.tscn" id="3_wa5vi"]
 
 [node name="Character" type="CharacterBody2D" unique_id=971702195]
 collision_layer = 0
@@ -13,3 +15,10 @@ health = 100
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=555727301]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=470995652]
+
+[node name="DamageEmitter" parent="." unique_id=1434892928 instance=ExtResource("2_pjt0s")]
+
+[node name="DamageReceiver" parent="." unique_id=1146848414 instance=ExtResource("3_wa5vi")]
+
+[editable path="DamageEmitter"]
+[editable path="DamageReceiver"]

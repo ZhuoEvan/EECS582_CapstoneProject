@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://b081kochruapc" path="res://Assets/character/Enemy1.png" id="2_t7m7e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hdsgg"]
-radius = 8.0
-height = 52.0
+radius = 9.0
+height = 48.0
 
 [sub_resource type="Animation" id="Animation_hdsgg"]
 length = 0.001
@@ -21,10 +21,54 @@ tracks/0/keys = {
 "update": 1,
 "values": [5]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DamageEmitter:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ig54x"]
+resource_name = "hurt"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [15, 16, 17, 18, 19]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_action_complete"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_t7m7e"]
 resource_name = "default"
 length = 0.1
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -40,8 +84,8 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_r81cn"]
 resource_name = "light_attack"
-length = 0.35
-loop_mode = 1
+length = 0.5
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -49,16 +93,43 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.15, 0.2, 0.3),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [10, 11, 12, 13, 14]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_action_complete"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DamageEmitter:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_ayrpq"]
 resource_name = "walk"
-length = 0.3
+length = 0.5
 loop_mode = 1
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -66,7 +137,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [5, 6, 7, 8, 9]
@@ -75,15 +146,23 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r81cn"]
 _data = {
 &"RESET": SubResource("Animation_hdsgg"),
+&"hurt": SubResource("Animation_ig54x"),
 &"idle": SubResource("Animation_t7m7e"),
 &"light_attack": SubResource("Animation_r81cn"),
 &"walk": SubResource("Animation_ayrpq")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hdsgg"]
+size = Vector2(24, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t7m7e"]
+size = Vector2(54, 68)
+
 [node name="Enemy01" unique_id=971702195 instance=ExtResource("1_hdsgg")]
 y_sort_enabled = true
 collision_layer = 4
 collision_mask = 8
+damage = 3
 speed = 50.0
 
 [node name="Sprite2D" parent="." index="0" unique_id=1319192139]
@@ -94,9 +173,28 @@ vframes = 5
 frame = 5
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=555727301]
-position = Vector2(4, -8)
+position = Vector2(4, -9)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_hdsgg")
 
 [node name="AnimationPlayer" parent="." index="2" unique_id=470995652]
 libraries/ = SubResource("AnimationLibrary_r81cn")
+autoplay = &"idle"
+
+[node name="DamageEmitter" parent="." index="3" unique_id=1434892928]
+position = Vector2(4, -28)
+collision_mask = 16
+
+[node name="CollisionShape2D" parent="DamageEmitter" index="0" unique_id=1173072616]
+position = Vector2(23, 0)
+shape = SubResource("RectangleShape2D_hdsgg")
+
+[node name="DamageReceiver" parent="." index="4" unique_id=1146848414]
+position = Vector2(3, -34)
+collision_layer = 32
+
+[node name="CollisionShape2D" parent="DamageReceiver" index="0" unique_id=390845195]
+shape = SubResource("RectangleShape2D_t7m7e")
+
+[editable path="DamageEmitter"]
+[editable path="DamageReceiver"]
