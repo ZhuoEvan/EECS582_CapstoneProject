@@ -12,18 +12,36 @@ grow_vertical = 2
 script = ExtResource("1_7bq7p")
 
 [node name="LevelSelect" type="Panel" parent="." unique_id=1000876459]
-visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelect" unique_id=1600020796]
+[node name="ColorRect" type="ColorRect" parent="LevelSelect" unique_id=1024539223]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 717.0
+offset_bottom = 242.0
+color = Color(0.6867809, 0.97272414, 0.815251, 1)
 
-[node name="Level1" type="Button" parent="LevelSelect/VBoxContainer" unique_id=1335064296]
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelect/ColorRect" unique_id=1600020796]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 0
+offset_right = 715.0
+offset_bottom = 243.0
+alignment = 1
+
+[node name="Level1" type="Button" parent="LevelSelect/ColorRect/VBoxContainer" unique_id=1335064296]
+modulate = Color(0.015471222, 0.026643349, 0.01315582, 1)
 layout_mode = 2
+size_flags_horizontal = 4
+text = "Level 1"
+icon_alignment = 1
+expand_icon = true
+
+[node name="Back" type="Button" parent="LevelSelect/ColorRect/VBoxContainer" unique_id=471564503]
+modulate = Color(0.033783812, 0.021143112, 0.0017884123, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=2133456339]
 layout_mode = 1
@@ -63,6 +81,8 @@ text = "Setting"
 layout_mode = 2
 text = "Credit"
 
+[connection signal="pressed" from="LevelSelect/ColorRect/VBoxContainer/Level1" to="." method="_on_Level1_pressed"]
+[connection signal="pressed" from="LevelSelect/ColorRect/VBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/Skill" to="." method="_on_skill_pressed"]
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/Setting" to="." method="_on_setting_pressed"]
