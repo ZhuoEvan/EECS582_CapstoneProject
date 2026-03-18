@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cu1vm8e6mkq7k" path="res://player.tscn" id="2_yx7mw"]
 [ext_resource type="PackedScene" uid="uid://cxyuw0ov27lt0" path="res://enemy_01.tscn" id="3_ykeeq"]
 [ext_resource type="Script" uid="uid://bufl4kcu1murd" path="res://enemy_01.gd" id="4_6bm6p"]
+[ext_resource type="Script" uid="uid://dpmhru7fpnkx3" path="res://pause.gd" id="6_2pltu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dugkq"]
 size = Vector2(9, 250)
@@ -46,3 +47,25 @@ fatigued = false
 [node name="Player" parent="ActorsContainer" unique_id=971702195 groups=["player"] instance=ExtResource("2_yx7mw")]
 position = Vector2(37, -41)
 collision_mask = 13
+
+[node name="Pause" type="CanvasLayer" parent="ActorsContainer/Player" unique_id=1106714219]
+process_mode = 3
+layer = 10
+script = ExtResource("6_2pltu")
+
+[node name="ColorRect" type="ColorRect" parent="ActorsContainer/Player/Pause" unique_id=1903756635]
+offset_left = 48.0
+offset_top = -182.0
+offset_right = 271.0
+offset_bottom = -60.0
+color = Color(0, 0, 0, 0.44705883)
+
+[node name="pause_button" type="Button" parent="ActorsContainer/Player/Pause/ColorRect" unique_id=520362899]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 21.0
+offset_right = 144.0
+offset_bottom = 57.0
+text = "Resume"
+
+[connection signal="pressed" from="ActorsContainer/Player/Pause/ColorRect/pause_button" to="ActorsContainer/Player/Pause" method="_on_pause_button_pressed"]
