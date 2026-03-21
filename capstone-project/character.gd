@@ -12,9 +12,9 @@
 #	enemy												#
 # Creation date: 02/09/26								#
 # ----------------------------------------------------- #
-# Last modifed date:03/04/26							#
+# Last modifed date:03/20/26							#
 # Changes: 												#
-#	Organized Code (Evan)
+#	Refactor some function for combo system (Zhang)
 # ===================================================== #
 
 #Class Declaration & Class Connection
@@ -37,7 +37,7 @@ extends CharacterBody2D
 @onready var damage_receiver : DamageReceiver = $DamageReceiver
 
 #Character State
-enum State { IDLE, WALK, ATTACK, HURT}
+enum State { IDLE, WALK, ATTACK, LIGHT_ATTACK, HEAVY_ATTACK, HURT}
 var state: State = State.IDLE
 
 # =====[Section 03]==================================== #
@@ -52,7 +52,7 @@ func _ready() -> void:
 #Process Method
 func _physics_process(_delta: float) -> void:
 	handle_input()
-	if state != State.ATTACK:
+	if can_move():
 		handle_movement()
 	handle_animations()
 	flip_sprites()
@@ -91,6 +91,9 @@ func can_attack() -> bool:
 # Changes state back to IDLE.
 func on_action_complete() -> void:
 	state = State.IDLE
+	#use to reset Player damage multiplier just in case player perform a combo
+	if self is Player:
+		(self as Player).current_damage_multiplier = 1.0
 
 #Method for handling receiving damage
 func on_receive_damage(damage: int, direction: Vector2) -> void:
@@ -99,8 +102,17 @@ func on_receive_damage(damage: int, direction: Vector2) -> void:
 #Method for handling emitting damage
 func on_emit_damage(damage_receiver: DamageReceiver) -> void:
 	var direction := Vector2.LEFT if damage_receiver.global_position.x < global_position.x else Vector2.RIGHT
+	var final_damage = damage
+	if state == State.HEAVY_ATTACK:
+		#temp value for heavy attack
+		final_damage = 1.5* damage
+		#check if it player performing the attack
+	if self is Player:
+		#if it is player, then final damage will be muitliper by current damage multiplier
+		final_damage *= (self as Player).current_damage_multiplier
 	damage_receiver.damage_received.emit(damage, direction)
 	print(damage_receiver)
+	print(final_damage)
 
 # =====[Section 06]==================================== #
 # ANIMATION METHODS										#
@@ -111,8 +123,11 @@ func handle_animations() -> void:
 		animation_player.play("idle")
 	elif state == State.WALK:
 		animation_player.play("walk")
-	elif state == State.ATTACK:
+	elif state == State.LIGHT_ATTACK:
 		animation_player.play("light_attack")
+	#need adding the heavy attack animation in animation player, since it currently bugging the game(Zhang)
+	#elif state == State.HEAVY_ATTACK:
+		#animation_player.play("heavy_attack")
 	elif state == State.HURT:
 		animation_player.play("hurt")
 

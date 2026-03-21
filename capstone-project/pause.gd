@@ -4,7 +4,7 @@
 # Description: Pause Menu for the game					#
 # Authors: Zhang										#
 # Preconditon: 											#
-# 	Game is open and inside a level										#
+# 	Game is open and inside a level						#
 # Postcondition: 										#
 # 	Player being able to pause and do various setting of the game#
 # Creation date: 03/17/26								#
