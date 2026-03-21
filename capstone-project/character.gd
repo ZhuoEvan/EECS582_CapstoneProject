@@ -128,6 +128,8 @@ func handle_animations() -> void:
 	#need adding the heavy attack animation in animation player, since it currently bugging the game(Zhang)
 	#elif state == State.HEAVY_ATTACK:
 		#animation_player.play("heavy_attack")
+	elif state == State.ATTACK:
+		animation_player.play("light_attack")
 	elif state == State.HURT:
 		animation_player.play("hurt")
 

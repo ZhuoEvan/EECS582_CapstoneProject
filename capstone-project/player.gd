@@ -71,7 +71,7 @@ func check_combo() -> void:
 				input_buffer.clear()
 				combo_timer = 0
 				return
-	#call this function to handle basic attac
+	#call this function to handle basic attack
 	handle_basic_attack()
 
 #handling case where player just hitting
