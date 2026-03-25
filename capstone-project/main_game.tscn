@@ -6,12 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cxyuw0ov27lt0" path="res://enemy_01.tscn" id="3_ykeeq"]
 [ext_resource type="Script" uid="uid://bufl4kcu1murd" path="res://enemy_01.gd" id="4_6bm6p"]
 [ext_resource type="Script" uid="uid://dpmhru7fpnkx3" path="res://pause.gd" id="6_2pltu"]
-<<<<<<< HEAD
 [ext_resource type="PackedScene" uid="uid://cbnujbip8dbr" path="res://health_ui.tscn" id="7_f52ns"]
-=======
-[ext_resource type="PackedScene" uid="uid://bt7qb33kiy2jg" path="res://level_1_boss.tscn" id="7_l5ukw"]
-[ext_resource type="Script" uid="uid://cnkdweqb28wgs" path="res://level_1_boss.gd" id="8_4srsv"]
->>>>>>> 33a8f5a2e1d6b6ff866640bb79fcff5a1965980c
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dugkq"]
 size = Vector2(9, 250)
@@ -175,7 +170,6 @@ attack_duration = 0.35
 fatigue_meter = 0.0
 fatigued = false
 
-<<<<<<< HEAD
 [node name="HealthUI" parent="." unique_id=2071762170 instance=ExtResource("7_f52ns")]
 
 [node name="UIContainer" parent="HealthUI" index="0" unique_id=1344602966 node_paths=PackedStringArray("player")]
@@ -186,11 +180,6 @@ offset_top = -40.0
 offset_bottom = 0.0
 grow_vertical = 0
 player = NodePath("../../ActorsContainer/Player")
-=======
-[node name="Level1Boss" parent="ActorsContainer/Enemies" unique_id=898683359 instance=ExtResource("7_l5ukw")]
-position = Vector2(2008, -153)
-script = ExtResource("8_4srsv")
->>>>>>> 33a8f5a2e1d6b6ff866640bb79fcff5a1965980c
 
 [connection signal="pressed" from="ActorsContainer/Player/Pause/ColorRect/pause_button" to="ActorsContainer/Player/Pause" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="ActorsContainer/Player/Pause/ColorRect/quit" to="ActorsContainer/Player/Pause" method="_on_quit_pressed"]
