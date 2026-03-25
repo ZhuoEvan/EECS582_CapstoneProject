@@ -36,6 +36,105 @@ y_sort_enabled = true
 position = Vector2(37, -41)
 collision_mask = 13
 
+[node name="Enemies" type="Node2D" parent="ActorsContainer/Player" unique_id=1417494943]
+position = Vector2(-37, 41)
+
+[node name="Enemy01" parent="ActorsContainer/Player/Enemies" unique_id=1791732659 instance=ExtResource("3_ykeeq")]
+y_sort_enabled = false
+position = Vector2(423, -75.00001)
+scale = Vector2(0.7, 0.7)
+collision_layer = 6
+script = ExtResource("4_6bm6p")
+attack_range = 40.0
+attack_cooldown = 3.0
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy02" parent="ActorsContainer/Player/Enemies" unique_id=1782690121 instance=ExtResource("3_ykeeq")]
+y_sort_enabled = false
+position = Vector2(763, -67)
+scale = Vector2(0.7, 0.7)
+collision_layer = 6
+script = ExtResource("4_6bm6p")
+attack_range = 40.0
+attack_cooldown = 3.0
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy03" parent="ActorsContainer/Player/Enemies" unique_id=1281012465 instance=ExtResource("3_ykeeq")]
+y_sort_enabled = false
+position = Vector2(820, -29.999998)
+scale = Vector2(0.7, 0.7)
+collision_layer = 6
+script = ExtResource("4_6bm6p")
+attack_range = 40.0
+attack_cooldown = 3.0
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy04" parent="ActorsContainer/Player/Enemies" unique_id=1344158709 instance=ExtResource("3_ykeeq")]
+y_sort_enabled = false
+position = Vector2(881, -67)
+scale = Vector2(0.7, 0.7)
+collision_layer = 6
+script = ExtResource("4_6bm6p")
+attack_range = 40.0
+attack_cooldown = 3.0
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy05" parent="ActorsContainer/Player/Enemies" unique_id=182307296 instance=ExtResource("3_ykeeq")]
+y_sort_enabled = false
+position = Vector2(1281, -68)
+scale = Vector2(0.7, 0.7)
+collision_layer = 6
+script = ExtResource("4_6bm6p")
+attack_range = 40.0
+attack_cooldown = 3.0
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy06" parent="ActorsContainer/Player/Enemies" unique_id=133641381 instance=ExtResource("3_ykeeq")]
+y_sort_enabled = false
+position = Vector2(1329, -33)
+scale = Vector2(0.7, 0.7)
+collision_layer = 6
+script = ExtResource("4_6bm6p")
+attack_range = 40.0
+attack_cooldown = 3.0
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy07" parent="ActorsContainer/Player/Enemies" unique_id=280851354 instance=ExtResource("3_ykeeq")]
+y_sort_enabled = false
+position = Vector2(1231, -29)
+scale = Vector2(0.7, 0.7)
+collision_layer = 6
+script = ExtResource("4_6bm6p")
+attack_range = 40.0
+attack_cooldown = 3.0
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy08" parent="ActorsContainer/Player/Enemies" unique_id=931567969 instance=ExtResource("3_ykeeq")]
+y_sort_enabled = false
+position = Vector2(1375, -64.00001)
+scale = Vector2(0.7, 0.7)
+collision_layer = 6
+script = ExtResource("4_6bm6p")
+attack_range = 40.0
+attack_cooldown = 3.0
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
 [node name="Pause" type="CanvasLayer" parent="ActorsContainer/Player" unique_id=1106714219]
 process_mode = 3
 layer = 10
@@ -70,102 +169,6 @@ offset_top = 93.0
 offset_right = 219.0
 offset_bottom = 124.0
 text = "Quit"
-
-[node name="Enemy01" parent="ActorsContainer" unique_id=1791732659 instance=ExtResource("3_ykeeq")]
-y_sort_enabled = false
-position = Vector2(423, -75.00001)
-scale = Vector2(0.7, 0.7)
-collision_layer = 6
-script = ExtResource("4_6bm6p")
-attack_range = 40.0
-attack_cooldown = 3.0
-attack_duration = 0.35
-fatigue_meter = 0.0
-fatigued = false
-
-[node name="Enemy02" parent="ActorsContainer" unique_id=1782690121 instance=ExtResource("3_ykeeq")]
-y_sort_enabled = false
-position = Vector2(763, -67)
-scale = Vector2(0.7, 0.7)
-collision_layer = 6
-script = ExtResource("4_6bm6p")
-attack_range = 40.0
-attack_cooldown = 3.0
-attack_duration = 0.35
-fatigue_meter = 0.0
-fatigued = false
-
-[node name="Enemy03" parent="ActorsContainer" unique_id=1281012465 instance=ExtResource("3_ykeeq")]
-y_sort_enabled = false
-position = Vector2(820, -29.999998)
-scale = Vector2(0.7, 0.7)
-collision_layer = 6
-script = ExtResource("4_6bm6p")
-attack_range = 40.0
-attack_cooldown = 3.0
-attack_duration = 0.35
-fatigue_meter = 0.0
-fatigued = false
-
-[node name="Enemy04" parent="ActorsContainer" unique_id=1344158709 instance=ExtResource("3_ykeeq")]
-y_sort_enabled = false
-position = Vector2(881, -67)
-scale = Vector2(0.7, 0.7)
-collision_layer = 6
-script = ExtResource("4_6bm6p")
-attack_range = 40.0
-attack_cooldown = 3.0
-attack_duration = 0.35
-fatigue_meter = 0.0
-fatigued = false
-
-[node name="Enemy05" parent="ActorsContainer" unique_id=182307296 instance=ExtResource("3_ykeeq")]
-y_sort_enabled = false
-position = Vector2(1281, -68)
-scale = Vector2(0.7, 0.7)
-collision_layer = 6
-script = ExtResource("4_6bm6p")
-attack_range = 40.0
-attack_cooldown = 3.0
-attack_duration = 0.35
-fatigue_meter = 0.0
-fatigued = false
-
-[node name="Enemy06" parent="ActorsContainer" unique_id=133641381 instance=ExtResource("3_ykeeq")]
-y_sort_enabled = false
-position = Vector2(1329, -33)
-scale = Vector2(0.7, 0.7)
-collision_layer = 6
-script = ExtResource("4_6bm6p")
-attack_range = 40.0
-attack_cooldown = 3.0
-attack_duration = 0.35
-fatigue_meter = 0.0
-fatigued = false
-
-[node name="Enemy07" parent="ActorsContainer" unique_id=280851354 instance=ExtResource("3_ykeeq")]
-y_sort_enabled = false
-position = Vector2(1231, -29)
-scale = Vector2(0.7, 0.7)
-collision_layer = 6
-script = ExtResource("4_6bm6p")
-attack_range = 40.0
-attack_cooldown = 3.0
-attack_duration = 0.35
-fatigue_meter = 0.0
-fatigued = false
-
-[node name="Enemy08" parent="ActorsContainer" unique_id=931567969 instance=ExtResource("3_ykeeq")]
-y_sort_enabled = false
-position = Vector2(1375, -64.00001)
-scale = Vector2(0.7, 0.7)
-collision_layer = 6
-script = ExtResource("4_6bm6p")
-attack_range = 40.0
-attack_cooldown = 3.0
-attack_duration = 0.35
-fatigue_meter = 0.0
-fatigued = false
 
 [connection signal="pressed" from="ActorsContainer/Player/Pause/ColorRect/pause_button" to="ActorsContainer/Player/Pause" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="ActorsContainer/Player/Pause/ColorRect/quit" to="ActorsContainer/Player/Pause" method="_on_quit_pressed"]

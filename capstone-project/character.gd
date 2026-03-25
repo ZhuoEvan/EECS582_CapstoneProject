@@ -12,9 +12,9 @@
 #	enemy												#
 # Creation date: 02/09/26								#
 # ----------------------------------------------------- #
-# Last modifed date:03/20/26							#
+# Last modifed date:03/24/26							#
 # Changes: 												#
-#	Refactor some function for combo system (Zhang)
+#	Death Implementation
 # ===================================================== #
 
 #Class Declaration & Class Connection
@@ -37,7 +37,7 @@ extends CharacterBody2D
 @onready var damage_receiver : DamageReceiver = $DamageReceiver
 
 #Character State
-enum State { IDLE, WALK, ATTACK, LIGHT_ATTACK, HEAVY_ATTACK, HURT}
+enum State { IDLE, WALK, ATTACK, LIGHT_ATTACK, HEAVY_ATTACK, HURT, DEATH}
 var state: State = State.IDLE
 
 # =====[Section 03]==================================== #
@@ -52,11 +52,12 @@ func _ready() -> void:
 #Process Method
 func _physics_process(_delta: float) -> void:
 	handle_input()
-	if can_move():
+	if can_move() and state != State.DEATH:
 		handle_movement()
 	handle_animations()
 	flip_sprites()
 	move_and_slide()
+	handle_death(_delta)
 
 #Handling Input Method
 func handle_input() -> void:
@@ -79,6 +80,20 @@ func handle_movement() -> void:
 func can_move() -> bool:
 	return state == State.IDLE or state == State.WALK
 
+#Handling Death Method
+func handle_death(delta: float) -> void:
+	if check_death():
+		state = State.DEATH
+		await get_tree().create_timer(0.5).timeout
+		queue_free()
+		
+#Death Handling Helper Method
+func check_death() -> bool:
+	if health <= 0: #Check Health
+		return true
+	else:
+		return false
+
 
 # =====[Section 05]==================================== #
 # ATTACK METHODS										#
@@ -97,7 +112,8 @@ func on_action_complete() -> void:
 
 #Method for handling receiving damage
 func on_receive_damage(damage: int, direction: Vector2) -> void:
-	state = State.HURT
+	state = State.HURT #State Change to HURT
+	health = health - damage #Apply Damage to Health
 
 #Method for handling emitting damage
 func on_emit_damage(damage_receiver: DamageReceiver) -> void:
@@ -132,6 +148,8 @@ func handle_animations() -> void:
 		animation_player.play("light_attack")
 	elif state == State.HURT:
 		animation_player.play("hurt")
+	elif state == State.DEATH:
+		animation_player.play("death")
 
 #Sprite Flip Method
 #Flips the sprites to correct facing direction.

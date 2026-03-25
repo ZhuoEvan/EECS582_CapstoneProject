@@ -33,6 +33,34 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_dx1uh"]
+resource_name = "death"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.3, 0.40000004),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4)]
+}
 
 [sub_resource type="Animation" id="Animation_ig54x"]
 resource_name = "hurt"
@@ -146,6 +174,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r81cn"]
 _data = {
 &"RESET": SubResource("Animation_hdsgg"),
+&"death": SubResource("Animation_dx1uh"),
 &"hurt": SubResource("Animation_ig54x"),
 &"idle": SubResource("Animation_t7m7e"),
 &"light_attack": SubResource("Animation_r81cn"),
@@ -170,7 +199,7 @@ position = Vector2(0, -36)
 texture = ExtResource("2_t7m7e")
 hframes = 5
 vframes = 5
-frame = 5
+frame = 20
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=555727301]
 position = Vector2(4, -9)
@@ -179,7 +208,6 @@ shape = SubResource("CapsuleShape2D_hdsgg")
 
 [node name="AnimationPlayer" parent="." index="2" unique_id=470995652]
 libraries/ = SubResource("AnimationLibrary_r81cn")
-autoplay = &"idle"
 
 [node name="DamageEmitter" parent="." index="3" unique_id=1434892928]
 position = Vector2(4, -28)

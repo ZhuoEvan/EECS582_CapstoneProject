@@ -11,7 +11,7 @@
 # 	Track Player & Attempts to Damage Player			#
 # Creation date: 02/23/26								#
 # ----------------------------------------------------- #
-# Last modifed date:03/07/26							#
+# Last modifed date:03/24/26							#
 # Changes: 												#
 #	Added super calls to child methods.
 # ===================================================== #
@@ -47,6 +47,9 @@ func _ready() -> void:
 	#a safety check if player was not found
 	if player == null:
 		push_error("No player found in group 'player'")
+	#Assign Stats
+	health = 20
+	damage = 1
 	
 #Process Method
 func _physics_process(delta: float) -> void:
@@ -90,7 +93,7 @@ func enemy_idle() -> void:
 	
 #Fatigue Method
 func max_fatigue() -> void:
-	if fatigue_meter >= 1 && !(fatigued):
+	if fatigue_meter >= 10 && !(fatigued):
 		#Force no movement after max fatigue
 		fatigued = true
 		state = State.IDLE
