@@ -46,6 +46,8 @@ func _physics_process(delta: float) -> void:
 		input_buffer.clear()
 		combo_timer = 0
 	super._physics_process(delta)
+	if state == State.HURT:
+		animation_player.play("hurt")
 #helper function to register the input to compared to combo
 func register_input(action: String) -> void:
 	#append the input
@@ -91,3 +93,4 @@ func handle_basic_attack() -> void:
 	elif last_input == "heavy_attack":
 		state = State.HEAVY_ATTACK
 		print("heavy attack")
+		

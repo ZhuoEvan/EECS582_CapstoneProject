@@ -20,7 +20,8 @@
 #Class Declaration & Class Connection
 class_name Character
 extends CharacterBody2D
-
+signal health_changed(current_health: int, max_health: int)
+signal died
 
 # =====[Section 02]==================================== #
 # GLOBAL VARIABLES										#
@@ -29,6 +30,7 @@ extends CharacterBody2D
 @export var health : int
 @export var damage : int
 @export var speed : float
+@export var max_health : int = 100
 
 #Child Variables
 @onready var animation_player := $AnimationPlayer
@@ -114,7 +116,9 @@ func on_action_complete() -> void:
 func on_receive_damage(damage: int, direction: Vector2) -> void:
 	state = State.HURT #State Change to HURT
 	health = health - damage #Apply Damage to Health
-
+	health = clamp(health, 0, max_health)
+	health_changed.emit(health, max_health)
+	
 #Method for handling emitting damage
 func on_emit_damage(damage_receiver: DamageReceiver) -> void:
 	var direction := Vector2.LEFT if damage_receiver.global_position.x < global_position.x else Vector2.RIGHT

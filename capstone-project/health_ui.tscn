@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cbnujbip8dbr"]
+
+[ext_resource type="Script" uid="uid://bqu5yhfr67mxb" path="res://ui_health.gd" id="1_iy3an"]
+[ext_resource type="Texture2D" uid="uid://beoak166mvk8" path="res://Assets/character/playerhealthbar.png" id="1_tt5l4"]
+
+[node name="HealthUI" type="CanvasLayer" unique_id=2071762170]
+
+[node name="UIContainer" type="Control" parent="." unique_id=1344602966]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_iy3an")
+
+[node name="HeartSprite" type="Sprite2D" parent="UIContainer" unique_id=423211933]
+scale = Vector2(1.9140626, 1.9375001)
+texture = ExtResource("1_tt5l4")
+centered = false
+hframes = 17
+region_rect = Rect2(0, 0, 2176, 16)
