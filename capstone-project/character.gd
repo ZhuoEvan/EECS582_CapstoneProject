@@ -52,7 +52,7 @@ func _ready() -> void:
 #Process Method
 func _physics_process(_delta: float) -> void:
 	handle_input()
-	if can_move() and state != State.DEATH:
+	if can_move():
 		handle_movement()
 	handle_animations()
 	flip_sprites()
