@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://cxyuw0ov27lt0" path="res://enemy_01.tscn" id="3_ykeeq"]
 [ext_resource type="Script" uid="uid://bufl4kcu1murd" path="res://enemy_01.gd" id="4_6bm6p"]
 [ext_resource type="Script" uid="uid://dpmhru7fpnkx3" path="res://pause.gd" id="6_2pltu"]
+[ext_resource type="PackedScene" uid="uid://bt7qb33kiy2jg" path="res://level_1_boss.tscn" id="7_l5ukw"]
+[ext_resource type="Script" uid="uid://cnkdweqb28wgs" path="res://level_1_boss.gd" id="8_4srsv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dugkq"]
 size = Vector2(9, 250)
@@ -168,6 +170,10 @@ attack_cooldown = 3.0
 attack_duration = 0.35
 fatigue_meter = 0.0
 fatigued = false
+
+[node name="Level1Boss" parent="ActorsContainer/Enemies" unique_id=898683359 instance=ExtResource("7_l5ukw")]
+position = Vector2(2008, -153)
+script = ExtResource("8_4srsv")
 
 [connection signal="pressed" from="ActorsContainer/Player/Pause/ColorRect/pause_button" to="ActorsContainer/Player/Pause" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="ActorsContainer/Player/Pause/ColorRect/quit" to="ActorsContainer/Player/Pause" method="_on_quit_pressed"]
