@@ -137,8 +137,8 @@ func perform_attack() -> void:
 	print("Enemy attacks player!")
 	
 	#Currently comment out since player has not have a take damage method in script, it should work if implemented
-	#if player.has_method("take_damage"):
-		#player.take_damage(damage)
+	# if player.has_method("on_receive_damage"):
+		# player.on_receive_damage(damage)
 	#set the attack flag to false
 
 	#return to idle state to loop again
