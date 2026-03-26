@@ -59,7 +59,7 @@ func _physics_process(delta: float) -> void:
 	#calculate the distance between enemy and player
 	var distance_to_player = global_position.distance_to(player.global_position)
 	#If enemy is not currently attacking
-	if (state != State.ATTACK) && !(fatigued):
+	if (state != State.ATTACK) && on_screen(distance_to_player) && !(fatigued):
 		#check if it within attack range, if not, move toward player
 		if distance_to_player > attack_range:
 			move_toward_player()
@@ -91,6 +91,12 @@ func enemy_idle() -> void:
 	await get_tree().create_timer(attack_cooldown).timeout
 	can_attack_flag = true 
 	
+#Enemy On-screen Method
+func on_screen(DIST) -> bool:
+	#Enemy moves only in proximity to the Player
+	if DIST <= 360: return true
+	else: return false
+
 #Fatigue Method
 func max_fatigue() -> void:
 	if fatigue_meter >= 10 && !(fatigued):

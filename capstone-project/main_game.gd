@@ -14,11 +14,15 @@ extends Node2D
 
 @onready var player := $ActorsContainer/Player
 @onready var camera := $Camera
+@onready var stage := $Stage
 
 # =====[Section 02]==================================== #
 # Camera Methods										#
 # ===================================================== #
 #Camera Control Method
 func _process(delta: float) -> void:
-	if player.position.x > camera.position.x:
+	if player.position.x > camera.position.x: #Camera Follow Player Right
+		camera.position.x = player.position.x
+	#Camera Follow Player Left
+	elif player.position.x < camera.position.x and player.position.x >= 360:
 		camera.position.x = player.position.x
