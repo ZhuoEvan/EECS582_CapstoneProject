@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://cigrsn4kud6yl"]
+
+[ext_resource type="Texture2D" uid="uid://digh0c8q85wa2" path="res://Assets/character/PizzaRat.jpg" id="1_xgaxl"]
+[ext_resource type="Script" uid="uid://pq4wtdaw1qju" path="res://damage_receiver.gd" id="2_y2sqw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y2sqw"]
+radius = 39.0
+height = 310.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sopmt"]
+size = Vector2(151, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_db1oe"]
+size = Vector2(308, 309)
+
+[node name="Boss01" type="CharacterBody2D" unique_id=1915303537]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1325839989]
+position = Vector2(-1, 5)
+scale = Vector2(0.21071428, 0.21071428)
+texture = ExtResource("1_xgaxl")
+
+[node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=1928285383]
+position = Vector2(-1, 117)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_y2sqw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=362725659]
+root_node = NodePath("../CollisionBox")
+
+[node name="DamageEmitter" type="Area2D" parent="." unique_id=498648886]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageEmitter" unique_id=294551782]
+position = Vector2(103, 22)
+shape = SubResource("RectangleShape2D_sopmt")
+debug_color = Color(1, 0.007843138, 0.07058824, 0.41960785)
+
+[node name="DamageReceiver" type="Area2D" parent="." unique_id=1767613373]
+script = ExtResource("2_y2sqw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageReceiver" unique_id=1834056569]
+position = Vector2(-1, 1.5)
+shape = SubResource("RectangleShape2D_db1oe")
+debug_color = Color(0.23921569, 0.63529414, 0, 0.41960785)

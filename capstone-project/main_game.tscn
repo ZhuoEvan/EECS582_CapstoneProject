@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://cxyuw0ov27lt0" path="res://enemy_01.tscn" id="3_ykeeq"]
 [ext_resource type="Script" uid="uid://bufl4kcu1murd" path="res://enemy_01.gd" id="4_6bm6p"]
 [ext_resource type="Script" uid="uid://dpmhru7fpnkx3" path="res://pause.gd" id="6_2pltu"]
+[ext_resource type="PackedScene" uid="uid://cigrsn4kud6yl" path="res://boss_01.tscn" id="7_4srsv"]
 [ext_resource type="PackedScene" uid="uid://cbnujbip8dbr" path="res://health_ui.tscn" id="7_f52ns"]
+[ext_resource type="Script" uid="uid://drvhg3m61numw" path="res://boss_01.gd" id="8_mf81u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dugkq"]
 size = Vector2(9, 250)
@@ -169,6 +171,11 @@ attack_cooldown = 3.0
 attack_duration = 0.35
 fatigue_meter = 0.0
 fatigued = false
+
+[node name="Boss01" parent="ActorsContainer" unique_id=1915303537 instance=ExtResource("7_4srsv")]
+position = Vector2(2089, -82)
+scale = Vector2(0.3, 0.3)
+script = ExtResource("8_mf81u")
 
 [node name="HealthUI" parent="." unique_id=2071762170 instance=ExtResource("7_f52ns")]
 
