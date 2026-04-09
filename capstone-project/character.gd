@@ -41,7 +41,7 @@ signal died
 #Character State
 enum State { IDLE, WALK, ATTACK, LIGHT_ATTACK, HEAVY_ATTACK, HURT, DEATH}
 var state: State = State.IDLE
-
+var is_dead_handled: bool = false
 # =====[Section 03]==================================== #
 # INITIAL METHODS										#
 # ===================================================== #
@@ -60,7 +60,7 @@ func _physics_process(_delta: float) -> void:
 	flip_sprites()
 	move_and_slide()
 	handle_death(_delta)
-
+	
 #Handling Input Method
 func handle_input() -> void:
 	pass
@@ -84,8 +84,12 @@ func can_move() -> bool:
 
 #Handling Death Method
 func handle_death(delta: float) -> void:
+	if is_dead_handled:
+		return
 	if check_death():
+		is_dead_handled = true
 		state = State.DEATH
+		died.emit()
 		await get_tree().create_timer(0.5).timeout
 		queue_free()
 		
@@ -114,9 +118,10 @@ func on_action_complete() -> void:
 
 #Method for handling receiving damage
 func on_receive_damage(damage: int, direction: Vector2) -> void:
-	state = State.HURT #State Change to HURT
 	health = health - damage #Apply Damage to Health
 	health = clamp(health, 0, max_health)
+	if health > 0:
+		state = State.HURT #State Change to HURT
 	health_changed.emit(health, max_health)
 	
 #Method for handling emitting damage
@@ -130,7 +135,7 @@ func on_emit_damage(damage_receiver: DamageReceiver) -> void:
 	if self is Player:
 		#if it is player, then final damage will be muitliper by current damage multiplier
 		final_damage *= (self as Player).current_damage_multiplier
-	damage_receiver.damage_received.emit(damage, direction)
+	damage_receiver.damage_received.emit(final_damage, direction)
 	print(damage_receiver)
 	print(final_damage)
 

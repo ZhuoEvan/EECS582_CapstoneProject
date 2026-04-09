@@ -21,6 +21,8 @@ extends Node2D
 # ===================================================== #
 #Camera Control Method
 func _process(delta: float) -> void:
+	if not is_instance_valid(player):
+		return
 	if player.position.x > camera.position.x: #Camera Follow Player Right
 		camera.position.x = player.position.x
 	#Camera Follow Player Left

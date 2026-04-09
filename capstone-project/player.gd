@@ -93,4 +93,6 @@ func handle_basic_attack() -> void:
 	elif last_input == "heavy_attack":
 		state = State.HEAVY_ATTACK
 		print("heavy attack")
-		
+
+func _on_died() -> void:
+	get_tree().change_scene_to_file("res://scenes/main_menu(control).tscn")
