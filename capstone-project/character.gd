@@ -91,7 +91,8 @@ func handle_death(delta: float) -> void:
 		state = State.DEATH
 		died.emit()
 		await get_tree().create_timer(0.5).timeout
-		queue_free()
+		if not(self is Player):
+			queue_free()
 		
 #Death Handling Helper Method
 func check_death() -> bool:

@@ -16,6 +16,9 @@ extends Character
 
 #Handling Input Method
 func handle_input() -> void:
+	if state == State.DEATH:
+		velocity = Vector2.ZERO
+		return
 	var direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = direction * speed
 	
@@ -95,4 +98,8 @@ func handle_basic_attack() -> void:
 		print("heavy attack")
 
 func _on_died() -> void:
-	get_tree().change_scene_to_file("res://scenes/main_menu(control).tscn")
+	get_tree().change_scene_to_file("res://main_menu(control).tscn")
+
+func _ready() -> void:
+	super._ready()
+	died.connect(_on_died)
