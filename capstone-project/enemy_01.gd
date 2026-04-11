@@ -121,6 +121,12 @@ func enemy_attack() -> void:
 		can_attack_flag = false
 		await get_tree().create_timer(attack_duration).timeout
 		print("Enemy attacks player!")
+		
+		# Emit damage to any overlapping damage receivers
+		for area in damage_emitter.get_overlapping_areas():
+			if area is DamageReceiver:
+				on_emit_damage(area)
+		
 		fatigue_meter += 1
 		enemy_idle()
 	

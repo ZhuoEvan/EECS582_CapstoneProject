@@ -50,6 +50,11 @@ var is_dead_handled: bool = false
 func _ready() -> void:
 	damage_emitter.area_entered.connect(on_emit_damage.bind())
 	damage_receiver.damage_received.connect(on_receive_damage.bind())
+	
+	# Check for already overlapping damage receivers (in case they start overlapped)
+	for area in damage_emitter.get_overlapping_areas():
+		if area is DamageReceiver:
+			on_emit_damage(area)
 
 #Process Method
 func _physics_process(_delta: float) -> void:

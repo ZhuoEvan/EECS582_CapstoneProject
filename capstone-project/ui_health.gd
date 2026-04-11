@@ -33,3 +33,7 @@ func update_health_bar(current_health: int, max_health: int) -> void:
 	
 	# FLIP THE MATH HERE:
 	heart_sprite.frame = 17 - target_frame
+	
+	# Force immediate visual update on both the sprite and control
+	heart_sprite.queue_redraw()
+	queue_redraw()
