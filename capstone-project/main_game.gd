@@ -2,12 +2,12 @@
 # (Prologue Comment)									#
 # File Name: main_game.gd								#
 # Description: Camera Control							#
-# Authors: Ian, Evan									#
+# Authors: Ian, Evan, Zhang									#
 # Creation date: 03/01/26								#
 # ----------------------------------------------------- #
-# Last modifed date: 03/04/26							#
+# Last modifed date: 04/11/26							#
 # Changes:												#
-# >>> Added Prologue Comment
+# >>> bug fix(Zhang)
 # ===================================================== #
 
 extends Node2D
@@ -21,6 +21,8 @@ extends Node2D
 # ===================================================== #
 #Camera Control Method
 func _process(delta: float) -> void:
+	#bug fix: game no longer crash when player died, 
+	#instead the camera control will stop keep track of player(Zhang)
 	if not is_instance_valid(player):
 		return
 	if player.position.x > camera.position.x: #Camera Follow Player Right

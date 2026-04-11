@@ -11,9 +11,9 @@
 # 	Track Player & Attempts to Damage Player			#
 # Creation date: 02/23/26								#
 # ----------------------------------------------------- #
-# Last modifed date:03/24/26							#
+# Last modifed date:04/11/26							#
 # Changes: 												#
-#	Added super calls to child methods.
+#	bug fix for receiving damage.(Zhang)
 # ===================================================== #
 
 #Class Declaration & Class Connection
@@ -122,7 +122,7 @@ func enemy_attack() -> void:
 		await get_tree().create_timer(attack_duration).timeout
 		print("Enemy attacks player!")
 		
-		# Emit damage to any overlapping damage receivers
+		# Emit damage to any overlapping damage receivers(Zhang)
 		for area in damage_emitter.get_overlapping_areas():
 			if area is DamageReceiver:
 				on_emit_damage(area)

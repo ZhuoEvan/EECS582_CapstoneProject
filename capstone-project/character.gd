@@ -12,9 +12,9 @@
 #	enemy												#
 # Creation date: 02/09/26								#
 # ----------------------------------------------------- #
-# Last modifed date:03/24/26							#
+# Last modifed date:04/11/26							#
 # Changes: 												#
-#	Death Implementation
+#	bug fix for receiving damage(Zhang)
 # ===================================================== #
 
 #Class Declaration & Class Connection
@@ -51,7 +51,7 @@ func _ready() -> void:
 	damage_emitter.area_entered.connect(on_emit_damage.bind())
 	damage_receiver.damage_received.connect(on_receive_damage.bind())
 	
-	# Check for already overlapping damage receivers (in case they start overlapped)
+	# Check for already overlapping damage receivers (in case they start overlapped)(Zhang)
 	for area in damage_emitter.get_overlapping_areas():
 		if area is DamageReceiver:
 			on_emit_damage(area)
@@ -89,6 +89,7 @@ func can_move() -> bool:
 
 #Handling Death Method
 func handle_death(delta: float) -> void:
+	#check if death is handle or not
 	if is_dead_handled:
 		return
 	if check_death():
@@ -96,6 +97,7 @@ func handle_death(delta: float) -> void:
 		state = State.DEATH
 		died.emit()
 		await get_tree().create_timer(0.5).timeout
+		#only queue free if it not player
 		if not(self is Player):
 			queue_free()
 		

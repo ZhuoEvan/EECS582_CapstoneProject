@@ -4,8 +4,8 @@
 #Description: This .gd script provides player only methods.
 #Authors: Zhang, Jace
 #creation date: 3/4/26
-#last modifed date:3/20/26
-#changes: Added heavy attack logic, combo system, refactor some function(Zhang)
+#last modifed date:4/11/26
+#changes: bug fix, player now can correctly died(Zhang)
 #Preconditon: character script is created.
 #Postcondition: Player will have own methods.
 #
@@ -96,10 +96,10 @@ func handle_basic_attack() -> void:
 	elif last_input == "heavy_attack":
 		state = State.HEAVY_ATTACK
 		print("heavy attack")
-
+#connect a on death signal to player, so it can correctly return to main menu
 func _on_died() -> void:
 	get_tree().change_scene_to_file("res://main_menu(control).tscn")
-
+#added a ready function to make sure player can died
 func _ready() -> void:
 	super._ready()
 	died.connect(_on_died)
