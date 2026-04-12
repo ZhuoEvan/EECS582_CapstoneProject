@@ -4,7 +4,7 @@
 # Description: Handles movement, attack, and neccessary #
 #			   information (health, damage, etc.) for 	#
 #			   characters								#
-# Authors: Zhang, Jace, Evan							#
+# Authors: Zhang, Jace, Evan, Ian						#
 # Preconditon: 											#
 # 	Acceptable button: W,A,S,D, Left & Right Click		#
 # Postcondition: 										#
@@ -48,6 +48,8 @@ var is_dead_handled: bool = false
 
 #Gets the damage components connected
 func _ready() -> void:
+	collision_layer = 2;
+	collision_mask = 1 | 4;
 	damage_emitter.area_entered.connect(on_emit_damage.bind())
 	damage_receiver.damage_received.connect(on_receive_damage.bind())
 	

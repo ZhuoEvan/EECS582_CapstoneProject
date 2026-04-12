@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://do3x7kj1kqvtx"]
+
+[ext_resource type="PackedScene" uid="uid://boi1m1go5cj17" path="res://stage.tscn" id="1_smxaa"]
+[ext_resource type="Texture2D" uid="uid://gf3jshjhwlpd" path="res://Assets/stage/Stage1.png" id="2_gp3hl"]
+
+[node name="Stage_01" unique_id=804948163 instance=ExtResource("1_smxaa")]
+
+[node name="MainBackground" parent="Background" parent_id_path=PackedInt32Array(721010743) index="0" unique_id=1599158923]
+texture = ExtResource("2_gp3hl")

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dqr2ymohqgddo"]
 
-[ext_resource type="PackedScene" uid="uid://boi1m1go5cj17" path="res://stage.tscn" id="1_1oj5k"]
 [ext_resource type="Script" uid="uid://bjvd0s0p1qa0c" path="res://main_game.gd" id="1_dugkq"]
+[ext_resource type="PackedScene" uid="uid://do3x7kj1kqvtx" path="res://stage_01.tscn" id="2_4srsv"]
 [ext_resource type="PackedScene" uid="uid://cu1vm8e6mkq7k" path="res://player.tscn" id="2_yx7mw"]
 [ext_resource type="PackedScene" uid="uid://cxyuw0ov27lt0" path="res://enemy_01.tscn" id="3_ykeeq"]
 [ext_resource type="Script" uid="uid://bufl4kcu1murd" path="res://enemy_01.gd" id="4_6bm6p"]
@@ -16,8 +16,8 @@ size = Vector2(9, 250)
 [node name="MainGame" type="Node2D" unique_id=1094458621]
 script = ExtResource("1_dugkq")
 
-[node name="Stage" parent="." unique_id=804948163 instance=ExtResource("1_1oj5k")]
-position = Vector2(0, -240)
+[node name="Stage_01" parent="." unique_id=804948163 instance=ExtResource("2_4srsv")]
+position = Vector2(-1, -239)
 
 [node name="Camera" type="Camera2D" parent="." unique_id=2107624244]
 position = Vector2(360, -121)

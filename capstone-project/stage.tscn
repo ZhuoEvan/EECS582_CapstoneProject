@@ -1,7 +1,5 @@
 [gd_scene format=3 uid="uid://boi1m1go5cj17"]
 
-[ext_resource type="Texture2D" uid="uid://gf3jshjhwlpd" path="res://Assets/stage/Stage1.png" id="1_6eo5e"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6eo5e"]
 size = Vector2(2159.5, 24)
 
@@ -12,10 +10,9 @@ size = Vector2(20, 169)
 
 [node name="Background" type="Node2D" parent="." unique_id=721010743]
 
-[node name="Sprite2D" type="Sprite2D" parent="Background" unique_id=1599158923]
+[node name="MainBackground" type="Sprite2D" parent="Background" unique_id=1599158923]
 position = Vector2(0, -1)
 scale = Vector2(3.6, 3.7499998)
-texture = ExtResource("1_6eo5e")
 centered = false
 
 [node name="WorldColliders" type="Node2D" parent="." unique_id=693956406]

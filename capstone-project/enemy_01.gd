@@ -42,6 +42,8 @@ var can_attack_flag := true #flag to prevent stunlocking
 #Ready Method
 func _ready() -> void:
 	super._ready()
+	collision_layer = 2;
+	collision_mask = 4;
 	#Find the first node in the scene that belongs to the group "player"
 	player = get_tree().get_first_node_in_group("player")
 	#a safety check if player was not found
