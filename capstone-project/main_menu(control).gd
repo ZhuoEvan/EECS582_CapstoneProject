@@ -17,8 +17,10 @@ extends Control
 
 @onready var level_select = $LevelSelect
 @onready var main_menu = $ColorRect
+@export var music: MusicManager.Music
 #Ready Method
 func _ready():
+	MusicPlayer.play(MusicManager.Music.MENU)
 	level_select.visible = false
 
 #set level select panel to true so player can do level select

@@ -97,6 +97,7 @@ func handle_death(delta: float) -> void:
 	if check_death():
 		is_dead_handled = true
 		state = State.DEATH
+		SoundPlayer.play(SoundManager.Sound.DEATH)
 		died.emit()
 		await get_tree().create_timer(0.5).timeout
 		#only queue free if it not player
@@ -133,6 +134,7 @@ func on_receive_damage(damage: int, direction: Vector2) -> void:
 	if health > 0:
 		state = State.HURT #State Change to HURT
 	health_changed.emit(health, max_health)
+	SoundPlayer.play(SoundManager.Sound.HIT)
 	
 #Method for handling emitting damage
 func on_emit_damage(damage_receiver: DamageReceiver) -> void:

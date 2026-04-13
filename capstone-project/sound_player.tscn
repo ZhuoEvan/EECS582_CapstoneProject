@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cy6qb7c4w7ngu"]
+
+[ext_resource type="Script" uid="uid://bmq3rs3kbp7wu" path="res://sound_manager.gd" id="1_fbbgd"]
+[ext_resource type="AudioStream" uid="uid://dwy8enun0tsyb" path="res://Assets/sound_effects/hit.mp3" id="1_t28fc"]
+[ext_resource type="AudioStream" uid="uid://c6qcjqv73rw6v" path="res://Assets/sound_effects/death.mp3" id="2_fbbgd"]
+
+[node name="SoundPlayer" type="Node" unique_id=963818930]
+script = ExtResource("1_fbbgd")
+
+[node name="SFXHit" type="AudioStreamPlayer" parent="." unique_id=78369966]
+stream = ExtResource("1_t28fc")
+bus = &"SFX"
+
+[node name="SFXDeath" type="AudioStreamPlayer" parent="." unique_id=895598501]
+stream = ExtResource("2_fbbgd")
+bus = &"SFX"
