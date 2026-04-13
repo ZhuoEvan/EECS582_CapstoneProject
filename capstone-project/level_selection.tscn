@@ -1,0 +1,137 @@
+[gd_scene format=3 uid="uid://ddkkrfksmvdrd"]
+
+[ext_resource type="Script" uid="uid://ciggd2rfi1b83" path="res://level_selection.gd" id="1_au0oc"]
+[ext_resource type="FontFile" uid="uid://bngsd5fa03slu" path="res://Assets/fonts/Blockstepped.ttf" id="1_tsd2a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fg0ae"]
+bg_color = Color(0.19212306, 0.17746663, 0.021572059, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_78hbd"]
+bg_color = Color(0.43529412, 0.30588236, 0.21568628, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_au0oc"]
+bg_color = Color(0.8156863, 0.6431373, 0.5254902, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0.9411765, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tsd2a"]
+bg_color = Color(0.8146188, 0.64325714, 0.5270419, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="LevelSelection" type="Control" unique_id=1594823384]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_au0oc")
+
+[node name="Background" type="Panel" parent="." unique_id=1622130098]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fg0ae")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1675569612]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -20.0
+offset_right = 300.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="level1" type="Button" parent="HBoxContainer" unique_id=94219466]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_78hbd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_au0oc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tsd2a")
+text = "Level 
+1"
+
+[node name="level2" type="Button" parent="HBoxContainer" unique_id=1181650687]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_78hbd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_au0oc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tsd2a")
+text = "Level 
+2"
+
+[node name="level3" type="Button" parent="HBoxContainer" unique_id=348428048]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_78hbd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_au0oc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tsd2a")
+text = "Level 
+3"
+
+[node name="Title" type="Label" parent="." unique_id=754109960]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_tsd2a")
+theme_override_font_sizes/font_size = 64
+text = "Level Selection"
+
+[node name="BackButton" type="Button" parent="." unique_id=712446880]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 45.0
+grow_vertical = 0
+text = "Back"
+
+[connection signal="pressed" from="HBoxContainer/level1" to="." method="_on_level_1_pressed"]
+[connection signal="pressed" from="HBoxContainer/level2" to="." method="_on_level_2_pressed"]
+[connection signal="pressed" from="HBoxContainer/level3" to="." method="_on_level_3_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

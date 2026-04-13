@@ -98,7 +98,7 @@ func handle_basic_attack() -> void:
 		print("heavy attack")
 #connect a on death signal to player, so it can correctly return to main menu
 func _on_died() -> void:
-	get_tree().change_scene_to_file("res://main_menu(control).tscn")
+	get_tree().change_scene_to_file("res://level_selection.tscn")
 #added a ready function to make sure player can died
 func _ready() -> void:
 	super._ready()

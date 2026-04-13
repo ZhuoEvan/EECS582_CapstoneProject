@@ -191,6 +191,8 @@ player = NodePath("../../ActorsContainer/Player")
 [node name="HeartSprite" parent="HealthUI/UIContainer" index="0" unique_id=423211933]
 position = Vector2(2, -187)
 
+[node name="Stage_02" type="Node2D" parent="." unique_id=2129610874]
+
 [connection signal="died" from="ActorsContainer/Player" to="ActorsContainer/Player" method="_on_died"]
 [connection signal="pressed" from="ActorsContainer/Player/Pause/ColorRect/pause_button" to="ActorsContainer/Player/Pause" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="ActorsContainer/Player/Pause/ColorRect/quit" to="ActorsContainer/Player/Pause" method="_on_quit_pressed"]
