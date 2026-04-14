@@ -1,44 +1,347 @@
 [gd_scene format=3 uid="uid://cigrsn4kud6yl"]
 
-[ext_resource type="Texture2D" uid="uid://digh0c8q85wa2" path="res://Assets/character/PizzaRat.jpg" id="1_xgaxl"]
-[ext_resource type="Script" uid="uid://pq4wtdaw1qju" path="res://damage_receiver.gd" id="2_y2sqw"]
+[ext_resource type="PackedScene" uid="uid://ck8202b44sl2d" path="res://character.tscn" id="1_boss01"]
+[ext_resource type="Script" uid="uid://drvhg3m61numw" path="res://boss_01.gd" id="2_boss01"]
+[ext_resource type="Texture2D" uid="uid://cvbsm4ostuenh" path="res://Assets/rat_boss_idel.png" id="3_boss01"]
+[ext_resource type="Texture2D" uid="uid://brj1vbf4me2jn" path="res://Assets/rat_boss_walk.png" id="4_boss01"]
+[ext_resource type="Texture2D" uid="uid://c2s0c1fj7enw7" path="res://Assets/rat_boss_scream.png" id="5_boss01"]
+[ext_resource type="Texture2D" uid="uid://b3vcw2ojh8txl" path="res://Assets/rat_boss_stomp.png" id="6_boss01"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y2sqw"]
-radius = 39.0
-height = 310.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_boss01"]
+radius = 40.0
+height = 150.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sopmt"]
-size = Vector2(151, 46)
+[sub_resource type="Animation" id="Animation_reset_boss"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_boss01")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DamageEmitter:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_db1oe"]
-size = Vector2(308, 309)
+[sub_resource type="Animation" id="Animation_death_boss"]
+resource_name = "death"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
 
-[node name="Boss01" type="CharacterBody2D" unique_id=1915303537]
+[sub_resource type="Animation" id="Animation_hurt_boss"]
+resource_name = "hurt"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_boss01")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.083, 0.166, 0.25, 0.333, 0.416),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_action_complete"
+}]
+}
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1325839989]
-position = Vector2(-1, 5)
-scale = Vector2(0.21071428, 0.21071428)
-texture = ExtResource("1_xgaxl")
+[sub_resource type="Animation" id="Animation_idle_boss"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_boss01")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
 
-[node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=1928285383]
-position = Vector2(-1, 117)
+[sub_resource type="Animation" id="Animation_stomp_boss"]
+resource_name = "light_attack"
+length = 0.7
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_boss01")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DamageEmitter:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_action_complete"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_walk_boss"]
+resource_name = "walk"
+length = 0.9
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_boss01")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_boss01"]
+_data = {
+&"RESET": SubResource("Animation_reset_boss"),
+&"death": SubResource("Animation_death_boss"),
+&"hurt": SubResource("Animation_hurt_boss"),
+&"idle": SubResource("Animation_idle_boss"),
+&"light_attack": SubResource("Animation_stomp_boss"),
+&"walk": SubResource("Animation_walk_boss")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_emitter_boss"]
+size = Vector2(140, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_receiver_boss"]
+size = Vector2(200, 240)
+
+[node name="Boss01" unique_id=1915303537 instance=ExtResource("1_boss01")]
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("2_boss01")
+attack_range = 130.0
+attack_cooldown = 3.0
+attack_duration = 0.7
+fatigue_meter = 0.0
+fatigued = false
+stomp_chance = 0.4
+damage = 20
+speed = 65.0
+
+[node name="Sprite2D" parent="." index="0" unique_id=1319192139]
+position = Vector2(0, -160)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("3_boss01")
+hframes = 2
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=555727301]
+position = Vector2(0, -160)
 rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_y2sqw")
+shape = SubResource("CapsuleShape2D_boss01")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=362725659]
-root_node = NodePath("../CollisionBox")
+[node name="AnimationPlayer" parent="." index="2" unique_id=470995652]
+libraries/ = SubResource("AnimationLibrary_boss01")
+autoplay = &"idle"
 
-[node name="DamageEmitter" type="Area2D" parent="." unique_id=498648886]
+[node name="DamageEmitter" parent="." index="3" unique_id=1434892928]
+position = Vector2(0, -160)
+collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageEmitter" unique_id=294551782]
-position = Vector2(103, 22)
-shape = SubResource("RectangleShape2D_sopmt")
-debug_color = Color(1, 0.007843138, 0.07058824, 0.41960785)
+[node name="CollisionShape2D" parent="DamageEmitter" index="0" unique_id=1173072616]
+position = Vector2(90, 0)
+shape = SubResource("RectangleShape2D_emitter_boss")
 
-[node name="DamageReceiver" type="Area2D" parent="." unique_id=1767613373]
-script = ExtResource("2_y2sqw")
+[node name="DamageReceiver" parent="." index="4" unique_id=1146848414]
+position = Vector2(0, -160)
+collision_layer = 32
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageReceiver" unique_id=1834056569]
-position = Vector2(-1, 1.5)
-shape = SubResource("RectangleShape2D_db1oe")
-debug_color = Color(0.23921569, 0.63529414, 0, 0.41960785)
+[node name="CollisionShape2D" parent="DamageReceiver" index="0" unique_id=390845195]
+shape = SubResource("RectangleShape2D_receiver_boss")
+
+[editable path="DamageEmitter"]
+[editable path="DamageReceiver"]

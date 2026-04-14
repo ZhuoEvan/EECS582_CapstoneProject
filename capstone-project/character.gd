@@ -42,6 +42,7 @@ signal died
 enum State { IDLE, WALK, ATTACK, LIGHT_ATTACK, HEAVY_ATTACK, HURT, DEATH}
 var state: State = State.IDLE
 var is_dead_handled: bool = false
+var _death_animation_started: bool = false
 # =====[Section 03]==================================== #
 # INITIAL METHODS										#
 # ===================================================== #
@@ -54,9 +55,11 @@ func _ready() -> void:
 	damage_receiver.damage_received.connect(on_receive_damage.bind())
 	
 	# Check for already overlapping damage receivers (in case they start overlapped)(Zhang)
-	for area in damage_emitter.get_overlapping_areas():
-		if area is DamageReceiver:
-			on_emit_damage(area)
+	# Guard: get_overlapping_areas() throws an error when monitoring is disabled
+	if damage_emitter.monitoring:
+		for area in damage_emitter.get_overlapping_areas():
+			if area is DamageReceiver:
+				on_emit_damage(area)
 
 #Process Method
 func _physics_process(_delta: float) -> void:
@@ -155,22 +158,27 @@ func on_emit_damage(damage_receiver: DamageReceiver) -> void:
 # ANIMATION METHODS										#
 # ===================================================== #
 # Animation Selector Helper Method
+# Only starts an animation when the state changes to prevent restart loops
 func handle_animations() -> void:
+	var target_anim := ""
 	if state == State.IDLE:
-		animation_player.play("idle")
+		target_anim = "idle"
 	elif state == State.WALK:
-		animation_player.play("walk")
+		target_anim = "walk"
 	elif state == State.LIGHT_ATTACK:
-		animation_player.play("light_attack")
-	#need adding the heavy attack animation in animation player, since it currently bugging the game(Zhang)
-	#elif state == State.HEAVY_ATTACK:
-		#animation_player.play("heavy_attack")
+		target_anim = "light_attack"
+	elif state == State.HEAVY_ATTACK:
+		target_anim = "heavy_attack"
 	elif state == State.ATTACK:
-		animation_player.play("light_attack")
+		target_anim = "light_attack"
 	elif state == State.HURT:
-		animation_player.play("hurt")
+		target_anim = "hurt"
 	elif state == State.DEATH:
-		animation_player.play("death")
+		if not _death_animation_started:
+			target_anim = "death"
+			_death_animation_started = true
+	if target_anim != "" and animation_player.current_animation != target_anim:
+		animation_player.play(target_anim)
 
 #Sprite Flip Method
 #Flips the sprites to correct facing direction.

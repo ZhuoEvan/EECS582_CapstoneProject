@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://ck8202b44sl2d" path="res://character.tscn" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://8qwsusbndc48" path="res://player.gd" id="2_hqtel"]
 [ext_resource type="Texture2D" uid="uid://basn4rlsk2yjc" path="res://Assets/character/combined-main.png" id="2_onrkg"]
+[ext_resource type="Texture2D" uid="uid://b4heavyatk1a9" path="res://Assets/character/mainchar_heavyattack.png" id="3_heavyatk"]
+[ext_resource type="Texture2D" uid="uid://c3rxxvs5hriv7" path="res://Assets/mainchar_death.png" id="4_death"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
 radius = 5.0
@@ -64,6 +66,18 @@ tracks/1/keys = {
 "args": [],
 "method": &"on_action_complete"
 }]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 0.3, 0.3, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_hqtel"]
@@ -145,9 +159,71 @@ tracks/0/keys = {
 "values": [12, 13, 14, 15, 16, 17]
 }
 
+[sub_resource type="Animation" id="Animation_heavyatk"]
+resource_name = "heavy_attack"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HeavyAttackSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DamageEmitter:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_action_complete"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_death_player"]
+resource_name = "death"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DeathSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.083, 0.166, 0.25, 0.333, 0.416),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hqtel"]
 _data = {
 &"RESET": SubResource("Animation_onrkg"),
+&"death": SubResource("Animation_death_player"),
+&"heavy_attack": SubResource("Animation_heavyatk"),
 &"hurt": SubResource("Animation_2hs0m"),
 &"idle": SubResource("Animation_hqtel"),
 &"light_attack": SubResource("Animation_i3pqv"),
@@ -198,6 +274,22 @@ collision_layer = 16
 [node name="CollisionShape2D" parent="DamageReceiver" index="0" unique_id=390845195]
 position = Vector2(4, 0)
 shape = SubResource("RectangleShape2D_hqtel")
+
+[node name="HeavyAttackSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-24, -72)
+texture = ExtResource("3_heavyatk")
+centered = false
+hframes = 5
+visible = false
+
+[node name="DeathSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-24, -72)
+texture = ExtResource("4_death")
+centered = false
+hframes = 6
+visible = false
 
 [editable path="DamageEmitter"]
 [editable path="DamageReceiver"]

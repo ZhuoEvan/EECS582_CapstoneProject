@@ -26,13 +26,15 @@ func update_health_bar(current_health: int, max_health: int) -> void:
 	
 	# Multiply the percentage by your total number of frames minus 1.
 	# Since you have 17 frames, the frames are numbered 0 through 16.
-	var total_frames_minus_one: int = 17 
-	
-	# Calculate which frame to show
-	var target_frame: int = int(round(health_percent * total_frames_minus_one))
-	
+	var total_frames_minus_one: int = 16
+
+	# Calculate which frame to show.
+	# Using floor instead of round so ANY damage loss causes an immediate visual update.
+	# With round, small damage (e.g. 1 HP out of 100) would round up and show no change.
+	var target_frame: int = int(floor(health_percent * total_frames_minus_one))
+
 	# FLIP THE MATH HERE:
-	heart_sprite.frame = 17 - target_frame
+	heart_sprite.frame = 16 - target_frame
 	
 	# bug fix:Force immediate visual update on both the sprite and control(Zhang)
 	heart_sprite.queue_redraw()

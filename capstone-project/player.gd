@@ -49,8 +49,12 @@ func _physics_process(delta: float) -> void:
 		input_buffer.clear()
 		combo_timer = 0
 	super._physics_process(delta)
-	if state == State.HURT:
-		animation_player.play("hurt")
+	# Route visibility to the correct sprite sheet for each special state
+	var in_heavy = (state == State.HEAVY_ATTACK)
+	var in_death = (state == State.DEATH)
+	character_sprite.visible = !in_heavy and !in_death
+	heavy_attack_sprite.visible = in_heavy
+	death_sprite.visible = in_death
 #helper function to register the input to compared to combo
 func register_input(action: String) -> void:
 	#append the input
@@ -96,10 +100,28 @@ func handle_basic_attack() -> void:
 	elif last_input == "heavy_attack":
 		state = State.HEAVY_ATTACK
 		print("heavy attack")
-#connect a on death signal to player, so it can correctly return to main menu
+# References to the separate sprite sheet nodes
+@onready var heavy_attack_sprite: Sprite2D = $HeavyAttackSprite
+@onready var death_sprite: Sprite2D = $DeathSprite
+
+# Override flip_sprites to keep all sprite sheets in sync with movement direction
+func flip_sprites() -> void:
+	super.flip_sprites()
+	if velocity.x > 0:
+		heavy_attack_sprite.flip_h = false
+		death_sprite.flip_h = false
+	elif velocity.x < 0:
+		heavy_attack_sprite.flip_h = true
+		death_sprite.flip_h = true
+
+# Wait for the death animation to finish, then restart the current level.
+# The await defers the scene change out of the physics frame that triggered death,
+# which prevents the crash that happened when change_scene was called mid-frame.
 func _on_died() -> void:
-	get_tree().change_scene_to_file("res://level_selection.tscn")
+	await get_tree().create_timer(2.5).timeout
+	get_tree().reload_current_scene()
 #added a ready function to make sure player can died
 func _ready() -> void:
 	super._ready()
-	died.connect(_on_died)
+	if not died.is_connected(_on_died):
+		died.connect(_on_died)
