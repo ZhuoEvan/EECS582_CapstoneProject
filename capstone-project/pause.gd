@@ -34,6 +34,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_pause_button_pressed() -> void:
 	visible = false
 	get_tree().paused = false 
+
 #the actual siginaling when the wuit button is clicked, so the game will return to main menu
 func _on_quit_pressed() -> void:
 	get_tree().paused = false
