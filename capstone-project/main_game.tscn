@@ -3,8 +3,10 @@
 [ext_resource type="Script" uid="uid://bjvd0s0p1qa0c" path="res://main_game.gd" id="1_dugkq"]
 [ext_resource type="PackedScene" uid="uid://do3x7kj1kqvtx" path="res://stage_01.tscn" id="2_4srsv"]
 [ext_resource type="PackedScene" uid="uid://cu1vm8e6mkq7k" path="res://player.tscn" id="2_yx7mw"]
+[ext_resource type="PackedScene" uid="uid://l32b0acb3mux" path="res://stage_02.tscn" id="3_mf81u"]
 [ext_resource type="PackedScene" uid="uid://cxyuw0ov27lt0" path="res://enemy_01.tscn" id="3_ykeeq"]
 [ext_resource type="Script" uid="uid://bufl4kcu1murd" path="res://enemy_01.gd" id="4_6bm6p"]
+[ext_resource type="FontFile" uid="uid://bngsd5fa03slu" path="res://Assets/fonts/Blockstepped.ttf" id="6_02kkc"]
 [ext_resource type="Script" uid="uid://dpmhru7fpnkx3" path="res://pause.gd" id="6_2pltu"]
 [ext_resource type="PackedScene" uid="uid://cigrsn4kud6yl" path="res://boss_01.tscn" id="7_4srsv"]
 [ext_resource type="PackedScene" uid="uid://cbnujbip8dbr" path="res://health_ui.tscn" id="7_f52ns"]
@@ -18,6 +20,8 @@ script = ExtResource("1_dugkq")
 
 [node name="Stage_01" parent="." unique_id=804948163 instance=ExtResource("2_4srsv")]
 position = Vector2(-1, -239)
+
+[node name="Stage_02" parent="." unique_id=2061839401 instance=ExtResource("3_mf81u")]
 
 [node name="Camera" type="Camera2D" parent="." unique_id=2107624244]
 position = Vector2(360, -121)
@@ -44,34 +48,62 @@ process_mode = 3
 layer = 10
 script = ExtResource("6_2pltu")
 
-[node name="ColorRect" type="ColorRect" parent="ActorsContainer/Player/Pause" unique_id=1903756635]
+[node name="PauseBackground" type="ColorRect" parent="ActorsContainer/Player/Pause" unique_id=1903756635]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 112.0
-offset_top = 49.0
-offset_right = -185.0
-offset_bottom = -25.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.44705883)
 
-[node name="pause_button" type="Button" parent="ActorsContainer/Player/Pause/ColorRect" unique_id=520362899]
-process_mode = 3
-layout_mode = 0
-offset_left = 160.0
-offset_top = 21.0
-offset_right = 232.0
+[node name="Label" type="Label" parent="ActorsContainer/Player/Pause/PauseBackground" unique_id=1602171143]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -153.0
+offset_right = 153.0
 offset_bottom = 57.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("6_02kkc")
+theme_override_font_sizes/font_size = 48
+text = "Game Paused"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ActorsContainer/Player/Pause/PauseBackground" unique_id=661881905]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -153.0
+offset_top = -59.5
+offset_right = 153.0
+offset_bottom = 115.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="pause_button" type="Button" parent="ActorsContainer/Player/Pause/PauseBackground/VBoxContainer" unique_id=520362899]
+process_mode = 3
+layout_mode = 2
+size_flags_vertical = 4
 text = "Resume"
 
-[node name="quit" type="Button" parent="ActorsContainer/Player/Pause/ColorRect" unique_id=829056212]
-layout_mode = 0
-offset_left = 177.0
-offset_top = 93.0
-offset_right = 219.0
-offset_bottom = 124.0
+[node name="skill" type="Button" parent="ActorsContainer/Player/Pause/PauseBackground/VBoxContainer" unique_id=1462610570]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Skill Menu"
+
+[node name="settings" type="Button" parent="ActorsContainer/Player/Pause/PauseBackground/VBoxContainer" unique_id=1508351898]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Options"
+
+[node name="quit" type="Button" parent="ActorsContainer/Player/Pause/PauseBackground/VBoxContainer" unique_id=829056212]
+layout_mode = 2
+size_flags_vertical = 4
 text = "Quit"
 
 [node name="Enemies" type="Node2D" parent="ActorsContainer" unique_id=1417494943]
@@ -191,10 +223,8 @@ player = NodePath("../../ActorsContainer/Player")
 [node name="HeartSprite" parent="HealthUI/UIContainer" index="0" unique_id=423211933]
 position = Vector2(2, -187)
 
-[node name="Stage_02" type="Node2D" parent="." unique_id=2129610874]
-
 [connection signal="died" from="ActorsContainer/Player" to="ActorsContainer/Player" method="_on_died"]
-[connection signal="pressed" from="ActorsContainer/Player/Pause/ColorRect/pause_button" to="ActorsContainer/Player/Pause" method="_on_pause_button_pressed"]
-[connection signal="pressed" from="ActorsContainer/Player/Pause/ColorRect/quit" to="ActorsContainer/Player/Pause" method="_on_quit_pressed"]
+[connection signal="pressed" from="ActorsContainer/Player/Pause/PauseBackground/VBoxContainer/pause_button" to="ActorsContainer/Player/Pause" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="ActorsContainer/Player/Pause/PauseBackground/VBoxContainer/quit" to="ActorsContainer/Player/Pause" method="_on_quit_pressed"]
 
 [editable path="HealthUI"]

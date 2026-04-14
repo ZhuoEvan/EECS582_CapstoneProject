@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://l32b0acb3mux"]
+
+[ext_resource type="Texture2D" uid="uid://do7mvk88nsjqi" path="res://Assets/stage/Stage2.png" id="1_m8odb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6qmsi"]
+size = Vector2(750, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ee4k1"]
+size = Vector2(20, 70.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j2fg7"]
+size = Vector2(750, 20)
+
+[node name="Stage_02" type="Node2D" unique_id=2061839401]
+
+[node name="Background" type="Node2D" parent="." unique_id=1543468068]
+
+[node name="MainBackground" type="Sprite2D" parent="Background" unique_id=1677718800]
+position = Vector2(375, 32)
+texture = ExtResource("1_m8odb")
+
+[node name="WorldColliders" type="Node2D" parent="." unique_id=962484782]
+
+[node name="TopBorder" type="StaticBody2D" parent="WorldColliders" unique_id=1559223972]
+
+[node name="TopBorderShape" type="CollisionShape2D" parent="WorldColliders/TopBorder" unique_id=1542949380]
+position = Vector2(375, 23)
+shape = SubResource("RectangleShape2D_6qmsi")
+
+[node name="LeftBorder" type="StaticBody2D" parent="WorldColliders" unique_id=1265467070]
+
+[node name="LeftBorderShape" type="CollisionShape2D" parent="WorldColliders/LeftBorder" unique_id=1434135584]
+position = Vector2(-10, 48.75)
+shape = SubResource("RectangleShape2D_ee4k1")
+
+[node name="BottomBorder" type="StaticBody2D" parent="WorldColliders" unique_id=481950331]
+
+[node name="BottomBorderShape" type="CollisionShape2D" parent="WorldColliders/BottomBorder" unique_id=1821731417]
+position = Vector2(375, 74)
+shape = SubResource("RectangleShape2D_j2fg7")
