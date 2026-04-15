@@ -42,8 +42,8 @@ var can_attack_flag := true #flag to prevent stunlocking
 #Ready Method
 func _ready() -> void:
 	super._ready()
-	collision_layer = 2;
-	collision_mask = 4;
+	#collision_layer = 2;
+	#collision_mask = 4;
 	#Find the first node in the scene that belongs to the group "player"
 	player = get_tree().get_first_node_in_group("player")
 	#a safety check if player was not found
@@ -65,9 +65,11 @@ func _physics_process(delta: float) -> void:
 		#check if it within attack range, if not, move toward player
 		if distance_to_player > attack_range:
 			move_toward_player()
-			#else change state and start to attack the player
+		#else change state and start to attack the player
 		else:
+			damage_emitter.monitoring = true
 			enemy_attack()
+			damage_emitter.monitoring = false
 	super._physics_process(delta)
 
 #Passes parent method.
@@ -80,10 +82,20 @@ func handle_input() -> void:
 # ===================================================== #
 #Track Player Movement Method
 func move_toward_player() -> void:
-	#Calculate direction vector from enemy to player
-	var direction = (player.global_position - global_position).normalized()
-	velocity = direction * (speed * 0.75) #Set velocity toward player
-	fatigue_meter += 0.001
+	var distance_to_player = global_position.distance_to(player.global_position)
+	# Stop before reaching the player (add a buffer)
+	var stop_distance = attack_range - 5.0  # tweak this value as needed
+	
+	if distance_to_player > stop_distance:
+		var direction = (player.global_position - global_position).normalized()
+		velocity = direction * (speed * 0.75)
+		fatigue_meter += 0.001
+		state = State.WALK
+	else:
+		# Stop movement when close enough
+		velocity = Vector2.ZERO
+	
+
 	state = State.WALK #change state to walk
 
 #Idle Movement Method
@@ -123,12 +135,6 @@ func enemy_attack() -> void:
 		can_attack_flag = false
 		await get_tree().create_timer(attack_duration).timeout
 		print("Enemy attacks player!")
-		
-		# Emit damage to any overlapping damage receivers(Zhang)
-		for area in damage_emitter.get_overlapping_areas():
-			if area is DamageReceiver:
-				on_emit_damage(area)
-		
 		fatigue_meter += 1
 		enemy_idle()
 	
@@ -143,14 +149,6 @@ func start_attack() -> void:
 #Damage Deal Method
 func perform_attack() -> void:
 	print("Enemy attacks player!")
-	
-	#Currently comment out since player has not have a take damage method in script, it should work if implemented
-	# if player.has_method("on_receive_damage"):
-		# player.on_receive_damage(damage)
-	#set the attack flag to false
-
-	#return to idle state to loop again
-	#state = State.IDLE
 	#get the colddown timer based on the enemy attack cool_down and wait
 	await get_tree().create_timer(attack_cooldown).timeout
 	#set it attack flag to true after timer expire

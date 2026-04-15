@@ -182,7 +182,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hdsgg"]
-size = Vector2(24, 12)
+size = Vector2(35, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t7m7e"]
 size = Vector2(54, 68)
@@ -190,7 +190,7 @@ size = Vector2(54, 68)
 [node name="Enemy01" unique_id=971702195 instance=ExtResource("1_hdsgg")]
 y_sort_enabled = true
 collision_layer = 4
-collision_mask = 8
+collision_mask = 11
 damage = 5
 speed = 50.0
 
@@ -214,7 +214,7 @@ position = Vector2(4, -28)
 collision_mask = 16
 
 [node name="CollisionShape2D" parent="DamageEmitter" index="0" unique_id=1173072616]
-position = Vector2(23, 0)
+position = Vector2(22.5, 0)
 shape = SubResource("RectangleShape2D_hdsgg")
 
 [node name="DamageReceiver" parent="." index="4" unique_id=1146848414]
@@ -222,6 +222,7 @@ position = Vector2(3, -34)
 collision_layer = 32
 
 [node name="CollisionShape2D" parent="DamageReceiver" index="0" unique_id=390845195]
+position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_t7m7e")
 
 [editable path="DamageEmitter"]

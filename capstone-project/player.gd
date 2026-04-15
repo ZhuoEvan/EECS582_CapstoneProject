@@ -81,7 +81,9 @@ func check_combo() -> void:
 				combo_timer = 0
 				return
 	#call this function to handle basic attack
+	damage_emitter.monitoring = true 
 	handle_basic_attack()
+	damage_emitter.monitoring = false
 
 #handling case where player just hitting
 func handle_basic_attack() -> void:
