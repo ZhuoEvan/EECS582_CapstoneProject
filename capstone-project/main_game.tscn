@@ -262,6 +262,20 @@ theme_override_fonts/font = ExtResource("11_02kkc")
 theme_override_font_sizes/font_size = 32
 text = "Heavy Attack!"
 
+[node name="DrillPunch" type="Label" parent="ActionText/ActionTextControl" unique_id=867714290]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 520.0
+offset_right = 673.0
+offset_bottom = 35.0
+grow_horizontal = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("11_02kkc")
+theme_override_font_sizes/font_size = 40
+text = "Drill Punch!!!"
+
 [connection signal="died" from="ActorsContainer/Player" to="ActorsContainer/Player" method="_on_died"]
 [connection signal="pressed" from="ActorsContainer/Player/Pause/PauseBackground/VBoxContainer/pause_button" to="ActorsContainer/Player/Pause" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="ActorsContainer/Player/Pause/PauseBackground/VBoxContainer/quit" to="ActorsContainer/Player/Pause" method="_on_quit_pressed"]

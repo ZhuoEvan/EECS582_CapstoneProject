@@ -22,11 +22,15 @@ extends Node
 var selected_stage = null
 
 #Action Command Variables
-var current_action = null
+signal action_trigger(action_name : String)
+var current_action: String = ""
 
 
 # =====[Section 03]==================================== #
 # GODOT METHODS											#
 # ===================================================== #
 
-# None
+#Track Action Method
+func track_action(action_name: String):
+	current_action = action_name #Declare action
+	action_trigger.emit(action_name) #Send Signal

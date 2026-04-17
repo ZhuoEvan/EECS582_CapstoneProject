@@ -33,7 +33,7 @@ func handle_input() -> void:
 #can add more combo by using template {"name":"","sequence":[""],"result":STATE,"damage_multiplier": FLOAT}
 #currently limit is 3 for attack list
 var combo = [
-	{"name": "Basic", "sequence":["light_attack","light_attack","heavy_attack"], "result":State.HEAVY_ATTACK,
+	{"name": "drill_punch", "sequence":["light_attack","light_attack","heavy_attack"], "result":State.HEAVY_ATTACK,
 	"damage_multiplier": 1.5}
 ]
 #variable for combo system, Array is to track player input
@@ -75,6 +75,7 @@ func check_combo() -> void:
 		var seq = i["sequence"]
 		if input_buffer.size() == seq.size():
 			if input_buffer == seq:
+				GameManager.track_action(i["name"])
 				print("Combo:", i["name"])
 				state = i["result"]
 				current_damage_multiplier = i["damage_multiplier"]
@@ -98,12 +99,12 @@ func handle_basic_attack() -> void:
 	#if it light attack, perform a light attack
 	if last_input == "light_attack":
 		state = State.LIGHT_ATTACK
-		GameManager.current_action = "light_attack"
+		GameManager.track_action("light_attack")
 		print("light attack")
 	#if it is heavy attack, perform a heavy attack
 	elif last_input == "heavy_attack":
 		state = State.HEAVY_ATTACK
-		GameManager.current_action = "heavy_attack"
+		GameManager.track_action("heavy_attack")
 		print("heavy attack")
 # References to the separate sprite sheet nodes
 @onready var heavy_attack_sprite: Sprite2D = $HeavyAttackSprite
