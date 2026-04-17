@@ -22,11 +22,13 @@ func _ready() -> void:
 
 #Level 1 Button Method
 func _on_level_1_pressed() -> void:
-	get_tree().change_scene_to_file("res://main_game.tscn")
+	GameManager.selected_stage = "s1" #Select Stage 1
+	get_tree().change_scene_to_file("res://main_game.tscn") #Move Scene
 
 #Level 2 Button Method
 func _on_level_2_pressed() -> void:
-	get_tree().change_scene_to_file("res://main_game.tscn")
+	GameManager.selected_stage = "s2" #Select Stage 2
+	get_tree().change_scene_to_file("res://main_game.tscn") #Move Scene
 
 #Level 3 Button Method
 func _on_level_3_pressed() -> void:

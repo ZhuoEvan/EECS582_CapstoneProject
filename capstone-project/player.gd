@@ -55,6 +55,7 @@ func _physics_process(delta: float) -> void:
 	character_sprite.visible = !in_heavy and !in_death
 	heavy_attack_sprite.visible = in_heavy
 	death_sprite.visible = in_death
+	
 #helper function to register the input to compared to combo
 func register_input(action: String) -> void:
 	#append the input
@@ -97,10 +98,12 @@ func handle_basic_attack() -> void:
 	#if it light attack, perform a light attack
 	if last_input == "light_attack":
 		state = State.LIGHT_ATTACK
+		GameManager.current_action = "light_attack"
 		print("light attack")
 	#if it is heavy attack, perform a heavy attack
 	elif last_input == "heavy_attack":
 		state = State.HEAVY_ATTACK
+		GameManager.current_action = "heavy_attack"
 		print("heavy attack")
 # References to the separate sprite sheet nodes
 @onready var heavy_attack_sprite: Sprite2D = $HeavyAttackSprite
@@ -122,6 +125,7 @@ func flip_sprites() -> void:
 func _on_died() -> void:
 	await get_tree().create_timer(2.5).timeout
 	get_tree().reload_current_scene()
+	
 #added a ready function to make sure player can died
 func _ready() -> void:
 	super._ready()

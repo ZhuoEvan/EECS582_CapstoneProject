@@ -2,7 +2,7 @@
 # (Prologue Comment)									#
 # File Name: main_game.gd								#
 # Description: Camera Control							#
-# Authors: Ian, Evan, Zhang									#
+# Authors: Ian, Evan, Zhang								#
 # Creation date: 03/01/26								#
 # ----------------------------------------------------- #
 # Last modifed date: 04/11/26							#
@@ -12,9 +12,14 @@
 
 extends Node2D
 
+#Camera Ready Variables
 @onready var player := $ActorsContainer/Player
 @onready var camera := $Camera
-# @onready var stage := $Stage -- #Don't think this is needed
+
+#Stage Ready Variables
+@onready var stage1 = $Stage_01
+@onready var stage2 = $Stage_02
+
 
 # =====[Section 02]==================================== #
 # Camera Methods										#
@@ -35,3 +40,21 @@ func _process(delta: float) -> void:
 # =====[Section 03]==================================== #
 # Stage Selection										#
 # ===================================================== #
+
+#Hide Stages Method
+func _hide_stages() -> void:
+	stage1.hide() #Hide Stage 1
+	stage1.process_mode = Node.PROCESS_MODE_DISABLED
+	stage2.hide() #Hide Stage 2
+	stage2.process_mode = Node.PROCESS_MODE_DISABLED
+
+#Load Stage Method
+func _ready() -> void:
+	_hide_stages() #Hide All Stages
+	#Load Correct Stage
+	if GameManager.selected_stage == "s1":
+		stage1.show()
+		stage1.process_mode = Node.PROCESS_MODE_INHERIT
+	elif GameManager.selected_stage == "s2":
+		stage2.show()
+		stage2.process_mode = Node.PROCESS_MODE_INHERIT
