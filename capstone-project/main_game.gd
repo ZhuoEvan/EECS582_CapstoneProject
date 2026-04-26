@@ -19,6 +19,7 @@ extends Node2D
 #Stage Ready Variables
 @onready var stage1 = $Stage_01
 @onready var stage2 = $Stage_02
+@onready var stage3 = $Stage_03
 
 
 # =====[Section 02]==================================== #
@@ -47,6 +48,8 @@ func _hide_stages() -> void:
 	stage1.process_mode = Node.PROCESS_MODE_DISABLED
 	stage2.hide() #Hide Stage 2
 	stage2.process_mode = Node.PROCESS_MODE_DISABLED
+	stage3.hide() #Hide Stage 3
+	stage3.process_mode = Node.PROCESS_MODE_DISABLED
 
 #Load Stage Method
 func _ready() -> void:

@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://dpmhru7fpnkx3" path="res://pause.gd" id="6_2pltu"]
 [ext_resource type="PackedScene" uid="uid://cigrsn4kud6yl" path="res://boss_01.tscn" id="7_4srsv"]
 [ext_resource type="PackedScene" uid="uid://cbnujbip8dbr" path="res://health_ui.tscn" id="7_f52ns"]
+[ext_resource type="PackedScene" uid="uid://dww1id46gv64k" path="res://stage_03.tscn" id="7_krmtw"]
 [ext_resource type="FontFile" uid="uid://cqky04exheuh2" path="res://Assets/fonts/BADABB__.TTF" id="11_02kkc"]
 [ext_resource type="Script" uid="uid://bm7lcelhobpgo" path="res://action_text_control.gd" id="11_aomqu"]
 
@@ -126,7 +127,12 @@ position = Vector2(2090, 157)
 scale = Vector2(0.3, 0.3)
 
 [node name="Stage_02" parent="." unique_id=2061839401 instance=ExtResource("3_mf81u")]
+visible = false
 position = Vector2(-1, -253)
+scale = Vector2(4, 4)
+
+[node name="Stage_03" parent="." unique_id=1735144720 instance=ExtResource("7_krmtw")]
+visible = false
 scale = Vector2(4, 4)
 
 [node name="Camera" type="Camera2D" parent="." unique_id=2107624244]

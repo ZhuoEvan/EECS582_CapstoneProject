@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://1ivitd3s2jd4"]
+
+[ext_resource type="Script" uid="uid://bi7xuromxolv" path="res://key.gd" id="1_p0yg6"]
+[ext_resource type="Texture2D" uid="uid://bt4udj0y8j50i" path="res://Assets/chzblock_powerup.png" id="1_up4cr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p0yg6"]
+size = Vector2(26, 20)
+
+[node name="Key" type="Area2D" unique_id=320455342]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_p0yg6")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1418886509]
+texture = ExtResource("1_up4cr")
+hframes = 5
+
+[node name="KeyCollision" type="CollisionShape2D" parent="." unique_id=555955135]
+position = Vector2(-2, 0)
+shape = SubResource("RectangleShape2D_p0yg6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

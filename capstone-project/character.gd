@@ -38,6 +38,9 @@ signal died
 @onready var damage_emitter := $DamageEmitter
 @onready var damage_receiver : DamageReceiver = $DamageReceiver
 
+#Key Drop Variable
+var key_scene := preload("res://key.tscn")
+
 #Character State
 enum State { IDLE, WALK, ATTACK, LIGHT_ATTACK, HEAVY_ATTACK, HURT, DEATH}
 var state: State = State.IDLE
@@ -106,7 +109,12 @@ func handle_death(delta: float) -> void:
 		#only queue free if it not player
 		if not(self is Player):
 			queue_free()
-		
+			#Drop Cheese if boss
+			if (self is Boss01):
+				var key_item = key_scene.instantiate()
+				key_item.position = position
+				get_parent().add_child(key_item)
+			
 #Death Handling Helper Method
 func check_death() -> bool:
 	if health <= 0: #Check Health
