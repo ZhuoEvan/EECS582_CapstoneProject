@@ -4,9 +4,33 @@
 [ext_resource type="Script" uid="uid://dgy45wvefaurg" path="res://stage_01.gd" id="2_b62sb"]
 [ext_resource type="Texture2D" uid="uid://gf3jshjhwlpd" path="res://Assets/stage/Stage1.png" id="2_gp3hl"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aees8"]
+size = Vector2(20, 169)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b62sb"]
+size = Vector2(360, 119)
+
 [node name="Stage_01" unique_id=804948163 instance=ExtResource("1_smxaa")]
 script = ExtResource("2_b62sb")
 music = 1
 
 [node name="MainBackground" parent="Background" parent_id_path=PackedInt32Array(721010743) index="0" unique_id=1599158923]
 texture = ExtResource("2_gp3hl")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="WorldColliders" parent_id_path=PackedInt32Array(693956406) index="3" unique_id=1207640765]
+position = Vector2(-45, 148)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldColliders/StaticBody2D4" index="0" unique_id=1406029322]
+position = Vector2(2214, 31)
+shape = SubResource("RectangleShape2D_aees8")
+
+[node name="CameraLockZone" type="Area2D" parent="." index="2" unique_id=1409279365]
+
+[node name="CameraLockCollision" type="CollisionShape2D" parent="CameraLockZone" index="0" unique_id=112677883]
+position = Vector2(182, 177.5)
+shape = SubResource("RectangleShape2D_b62sb")
+debug_color = Color(0.5436888, 0.0011272222, 0.6907459, 0.41960785)
+
+[connection signal="body_entered" from="CameraLockZone" to="." method="_on_camera_lock_zone_body_entered"]
+[connection signal="body_exited" from="CameraLockZone" to="." method="_on_camera_lock_zone_body_exited"]

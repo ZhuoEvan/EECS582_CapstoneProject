@@ -32,7 +32,8 @@ func _on_level_2_pressed() -> void:
 
 #Level 3 Button Method
 func _on_level_3_pressed() -> void:
-	pass # Replace with function body.
+	GameManager.selected_stage = "s3" #Select Stage 3
+	get_tree().change_scene_to_file("res://main_game.tscn") #Move Scene
 
 #Back Button Method
 func _on_back_button_pressed() -> void:

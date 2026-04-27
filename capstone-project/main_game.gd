@@ -31,11 +31,16 @@ func _process(delta: float) -> void:
 	#instead the camera control will stop keep track of player(Zhang)
 	if not is_instance_valid(player):
 		return
-	if player.position.x > camera.position.x: #Camera Follow Player Right
+	#Camera Follow Player Right
+	if player.position.x > camera.position.x: 
 		camera.position.x = player.position.x
 	#Camera Follow Player Left
 	elif player.position.x < camera.position.x and player.position.x >= 360:
 		camera.position.x = player.position.x
+
+##Camera Sync Method
+#func sync_camera() -> void:
+	#camera.position.x = player.position.x
 
 
 # =====[Section 03]==================================== #
@@ -61,3 +66,6 @@ func _ready() -> void:
 	elif GameManager.selected_stage == "s2":
 		stage2.show()
 		stage2.process_mode = Node.PROCESS_MODE_INHERIT
+	elif GameManager.selected_stage == "s3":
+		stage3.show()
+		stage3.process_mode = Node.PROCESS_MODE_INHERIT

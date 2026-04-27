@@ -133,6 +133,7 @@ scale = Vector2(4, 4)
 
 [node name="Stage_03" parent="." unique_id=1735144720 instance=ExtResource("7_krmtw")]
 visible = false
+position = Vector2(0, -256)
 scale = Vector2(4, 4)
 
 [node name="Camera" type="Camera2D" parent="." unique_id=2107624244]

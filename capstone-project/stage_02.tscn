@@ -11,6 +11,9 @@ size = Vector2(20, 70.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j2fg7"]
 size = Vector2(750, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m8odb"]
+size = Vector2(102, 31.5)
+
 [node name="Stage_02" type="Node2D" unique_id=2061839401]
 
 [node name="Background" type="Node2D" parent="." unique_id=1543468068]
@@ -38,3 +41,16 @@ shape = SubResource("RectangleShape2D_ee4k1")
 [node name="BottomBorderShape" type="CollisionShape2D" parent="WorldColliders/BottomBorder" unique_id=1821731417]
 position = Vector2(375, 74)
 shape = SubResource("RectangleShape2D_j2fg7")
+
+[node name="RightBorder" type="StaticBody2D" parent="WorldColliders" unique_id=863334034]
+
+[node name="RightBorderShape" type="CollisionShape2D" parent="WorldColliders/RightBorder" unique_id=1334238442]
+position = Vector2(760, 49)
+shape = SubResource("RectangleShape2D_ee4k1")
+
+[node name="CameraLockZone" type="Area2D" parent="." unique_id=1796344842]
+
+[node name="CameraLockCollision" type="CollisionShape2D" parent="CameraLockZone" unique_id=500036535]
+position = Vector2(51, 47.75)
+shape = SubResource("RectangleShape2D_m8odb")
+debug_color = Color(0.5436888, 0.0011272222, 0.6907459, 0.41960785)

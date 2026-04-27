@@ -25,6 +25,8 @@ var selected_stage = null
 signal action_trigger(action_name : String)
 var current_action: String = ""
 
+#Camera Lock Variables
+var camera_status: bool = true #true=locked / false=unlocked
 
 # =====[Section 03]==================================== #
 # GODOT METHODS											#
