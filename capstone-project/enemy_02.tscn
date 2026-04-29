@@ -1,0 +1,229 @@
+[gd_scene format=3 uid="uid://c3enemy02sc1x"]
+
+[ext_resource type="PackedScene" uid="uid://ck8202b44sl2d" path="res://character.tscn" id="1_e2hdsgg"]
+[ext_resource type="Texture2D" uid="uid://hv66h1iqd5lc" path="res://Assets/character/Enemy2.png" id="2_e2t7m7e"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e2hdsgg"]
+radius = 9.0
+height = 48.0
+
+[sub_resource type="Animation" id="Animation_e2hdsgg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DamageEmitter:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_e2dx1uh"]
+resource_name = "death"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.3, 0.40000004),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_e2ig54x"]
+resource_name = "hurt"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [15, 16, 17, 18, 19]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_action_complete"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_e2t7m7e"]
+resource_name = "idle"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_e2r81cn"]
+resource_name = "light_attack"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13, 14]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_action_complete"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DamageEmitter:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_e2ayrpq"]
+resource_name = "walk"
+length = 0.5
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8, 9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e2r81cn"]
+_data = {
+&"RESET": SubResource("Animation_e2hdsgg"),
+&"death": SubResource("Animation_e2dx1uh"),
+&"hurt": SubResource("Animation_e2ig54x"),
+&"idle": SubResource("Animation_e2t7m7e"),
+&"light_attack": SubResource("Animation_e2r81cn"),
+&"walk": SubResource("Animation_e2ayrpq")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e2hdsgg"]
+size = Vector2(35, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e2t7m7e"]
+size = Vector2(54, 68)
+
+[node name="Enemy02" unique_id=971702196 instance=ExtResource("1_e2hdsgg")]
+y_sort_enabled = true
+collision_layer = 4
+collision_mask = 11
+damage = 3
+speed = 65.0
+
+[node name="Sprite2D" parent="." index="0" unique_id=1319192140]
+position = Vector2(0, -36)
+texture = ExtResource("2_e2t7m7e")
+hframes = 5
+vframes = 5
+frame = 20
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=555727302]
+position = Vector2(4, -9)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_e2hdsgg")
+
+[node name="AnimationPlayer" parent="." index="2" unique_id=470995653]
+libraries/ = SubResource("AnimationLibrary_e2r81cn")
+
+[node name="DamageEmitter" parent="." index="3" unique_id=1434892929]
+position = Vector2(4, -28)
+collision_mask = 16
+
+[node name="CollisionShape2D" parent="DamageEmitter" index="0" unique_id=1173072617]
+position = Vector2(22.5, 0)
+shape = SubResource("RectangleShape2D_e2hdsgg")
+
+[node name="DamageReceiver" parent="." index="4" unique_id=1146848415]
+position = Vector2(3, -34)
+collision_layer = 32
+
+[node name="CollisionShape2D" parent="DamageReceiver" index="0" unique_id=390845196]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_e2t7m7e")
+
+[editable path="DamageEmitter"]
+[editable path="DamageReceiver"]

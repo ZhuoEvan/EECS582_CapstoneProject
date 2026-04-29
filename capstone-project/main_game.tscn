@@ -13,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://dww1id46gv64k" path="res://stage_03.tscn" id="7_krmtw"]
 [ext_resource type="FontFile" uid="uid://cqky04exheuh2" path="res://Assets/fonts/BADABB__.TTF" id="11_02kkc"]
 [ext_resource type="Script" uid="uid://bm7lcelhobpgo" path="res://action_text_control.gd" id="11_aomqu"]
+[ext_resource type="PackedScene" path="res://enemy_02.tscn" id="12_e2tscn"]
+[ext_resource type="Script" path="res://enemy_02.gd" id="12_e2gd"]
+[ext_resource type="PackedScene" path="res://cheese_pickup.tscn" id="13_chztscn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dugkq"]
 size = Vector2(9, 250)
@@ -122,6 +125,23 @@ attack_duration = 0.35
 fatigue_meter = 0.0
 fatigued = false
 
+[node name="Pickups" type="Node2D" parent="Stage_01" unique_id=4200000001]
+
+[node name="Cheese01" parent="Stage_01/Pickups" unique_id=4200000002 instance=ExtResource("13_chztscn")]
+position = Vector2(201, 183)
+
+[node name="Cheese02" parent="Stage_01/Pickups" unique_id=4200000003 instance=ExtResource("13_chztscn")]
+position = Vector2(701, 187)
+
+[node name="Cheese03" parent="Stage_01/Pickups" unique_id=4200000004 instance=ExtResource("13_chztscn")]
+position = Vector2(1101, 183)
+
+[node name="Cheese04" parent="Stage_01/Pickups" unique_id=4200000005 instance=ExtResource("13_chztscn")]
+position = Vector2(1601, 187)
+
+[node name="Cheese05" parent="Stage_01/Pickups" unique_id=4200000006 instance=ExtResource("13_chztscn")]
+position = Vector2(1951, 183)
+
 [node name="Boss01" parent="Stage_01" unique_id=1915303537 instance=ExtResource("7_4srsv")]
 position = Vector2(2090, 157)
 scale = Vector2(0.3, 0.3)
@@ -131,10 +151,346 @@ visible = false
 position = Vector2(-1, -253)
 scale = Vector2(4, 4)
 
+[node name="Enemies" type="Node2D" parent="Stage_02" unique_id=3100000001]
+
+[node name="Enemy01_A" parent="Stage_02/Enemies" unique_id=3100000002 instance=ExtResource("3_ykeeq")]
+y_sort_enabled = false
+position = Vector2(40, 50)
+scale = Vector2(0.175, 0.175)
+collision_layer = 6
+script = ExtResource("4_6bm6p")
+attack_range = 40.0
+attack_cooldown = 2.5
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy01_B" parent="Stage_02/Enemies" unique_id=3100000003 instance=ExtResource("3_ykeeq")]
+y_sort_enabled = false
+position = Vector2(65, 47)
+scale = Vector2(0.175, 0.175)
+collision_layer = 6
+script = ExtResource("4_6bm6p")
+attack_range = 40.0
+attack_cooldown = 2.5
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy01_C" parent="Stage_02/Enemies" unique_id=3100000007 instance=ExtResource("3_ykeeq")]
+y_sort_enabled = false
+position = Vector2(47, 54)
+scale = Vector2(0.175, 0.175)
+collision_layer = 6
+script = ExtResource("4_6bm6p")
+attack_range = 40.0
+attack_cooldown = 2.5
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy01_D" parent="Stage_02/Enemies" unique_id=3100000008 instance=ExtResource("3_ykeeq")]
+y_sort_enabled = false
+position = Vector2(88, 51)
+scale = Vector2(0.175, 0.175)
+collision_layer = 6
+script = ExtResource("4_6bm6p")
+attack_range = 40.0
+attack_cooldown = 2.5
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy02_A" parent="Stage_02/Enemies" unique_id=3100000004 instance=ExtResource("12_e2tscn")]
+y_sort_enabled = false
+position = Vector2(105, 48)
+scale = Vector2(0.175, 0.175)
+collision_layer = 6
+script = ExtResource("12_e2gd")
+attack_range = 40.0
+attack_cooldown = 0.8
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy02_B" parent="Stage_02/Enemies" unique_id=3100000005 instance=ExtResource("12_e2tscn")]
+y_sort_enabled = false
+position = Vector2(130, 52)
+scale = Vector2(0.175, 0.175)
+collision_layer = 6
+script = ExtResource("12_e2gd")
+attack_range = 40.0
+attack_cooldown = 0.8
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy02_C" parent="Stage_02/Enemies" unique_id=3100000006 instance=ExtResource("12_e2tscn")]
+y_sort_enabled = false
+position = Vector2(158, 49)
+scale = Vector2(0.175, 0.175)
+collision_layer = 6
+script = ExtResource("12_e2gd")
+attack_range = 40.0
+attack_cooldown = 0.8
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy02_D" parent="Stage_02/Enemies" unique_id=3100000009 instance=ExtResource("12_e2tscn")]
+y_sort_enabled = false
+position = Vector2(185, 51)
+scale = Vector2(0.175, 0.175)
+collision_layer = 6
+script = ExtResource("12_e2gd")
+attack_range = 40.0
+attack_cooldown = 0.8
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Pickups" type="Node2D" parent="Stage_02" unique_id=4300000001]
+
+[node name="Cheese01" parent="Stage_02/Pickups" unique_id=4300000002 instance=ExtResource("13_chztscn")]
+position = Vector2(50, 50)
+scale = Vector2(0.25, 0.25)
+
+[node name="Cheese02" parent="Stage_02/Pickups" unique_id=4300000003 instance=ExtResource("13_chztscn")]
+position = Vector2(150, 48)
+scale = Vector2(0.25, 0.25)
+
+[node name="Cheese03" parent="Stage_02/Pickups" unique_id=4300000004 instance=ExtResource("13_chztscn")]
+position = Vector2(300, 50)
+scale = Vector2(0.25, 0.25)
+
+[node name="Cheese04" parent="Stage_02/Pickups" unique_id=4300000005 instance=ExtResource("13_chztscn")]
+position = Vector2(450, 48)
+scale = Vector2(0.25, 0.25)
+
+[node name="Cheese05" parent="Stage_02/Pickups" unique_id=4300000006 instance=ExtResource("13_chztscn")]
+position = Vector2(580, 50)
+scale = Vector2(0.25, 0.25)
+
+[node name="Cheese06" parent="Stage_02/Pickups" unique_id=4300000007 instance=ExtResource("13_chztscn")]
+position = Vector2(700, 48)
+scale = Vector2(0.25, 0.25)
+
+[node name="Boss01" parent="Stage_02" unique_id=3100000010 instance=ExtResource("7_4srsv")]
+position = Vector2(680, 45)
+scale = Vector2(0.075, 0.075)
+attack_range = 130.0
+attack_cooldown = 2.5
+attack_duration = 0.7
+fatigue_meter = 0.0
+fatigued = false
+stomp_chance = 0.6
+has_slam = true
+slam_damage_multiplier = 2.0
+damage = 25
+speed = 70.0
+health = 150
+max_health = 150
+
 [node name="Stage_03" parent="." unique_id=1735144720 instance=ExtResource("7_krmtw")]
 visible = false
 position = Vector2(0, -256)
 scale = Vector2(4, 4)
+
+[node name="Enemies" type="Node2D" parent="Stage_03" unique_id=3200000001]
+
+[node name="Enemy01_A" parent="Stage_03/Enemies" unique_id=3200000002 instance=ExtResource("3_ykeeq")]
+y_sort_enabled = false
+position = Vector2(35, 50)
+scale = Vector2(0.175, 0.175)
+collision_layer = 6
+script = ExtResource("4_6bm6p")
+attack_range = 40.0
+attack_cooldown = 2.5
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy01_B" parent="Stage_03/Enemies" unique_id=3200000007 instance=ExtResource("3_ykeeq")]
+y_sort_enabled = false
+position = Vector2(42, 55)
+scale = Vector2(0.175, 0.175)
+collision_layer = 6
+script = ExtResource("4_6bm6p")
+attack_range = 40.0
+attack_cooldown = 2.5
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy01_C" parent="Stage_03/Enemies" unique_id=3200000008 instance=ExtResource("3_ykeeq")]
+y_sort_enabled = false
+position = Vector2(95, 52)
+scale = Vector2(0.175, 0.175)
+collision_layer = 6
+script = ExtResource("4_6bm6p")
+attack_range = 40.0
+attack_cooldown = 2.5
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy02_A" parent="Stage_03/Enemies" unique_id=3200000003 instance=ExtResource("12_e2tscn")]
+y_sort_enabled = false
+position = Vector2(52, 47)
+scale = Vector2(0.175, 0.175)
+collision_layer = 6
+script = ExtResource("12_e2gd")
+attack_range = 40.0
+attack_cooldown = 0.8
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy02_B" parent="Stage_03/Enemies" unique_id=3200000004 instance=ExtResource("12_e2tscn")]
+y_sort_enabled = false
+position = Vector2(72, 49)
+scale = Vector2(0.175, 0.175)
+collision_layer = 6
+script = ExtResource("12_e2gd")
+attack_range = 40.0
+attack_cooldown = 0.8
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy02_C" parent="Stage_03/Enemies" unique_id=3200000005 instance=ExtResource("12_e2tscn")]
+y_sort_enabled = false
+position = Vector2(110, 51)
+scale = Vector2(0.175, 0.175)
+collision_layer = 6
+script = ExtResource("12_e2gd")
+attack_range = 40.0
+attack_cooldown = 0.8
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy02_D" parent="Stage_03/Enemies" unique_id=3200000006 instance=ExtResource("12_e2tscn")]
+y_sort_enabled = false
+position = Vector2(130, 48)
+scale = Vector2(0.175, 0.175)
+collision_layer = 6
+script = ExtResource("12_e2gd")
+attack_range = 40.0
+attack_cooldown = 0.8
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy02_E" parent="Stage_03/Enemies" unique_id=3200000009 instance=ExtResource("12_e2tscn")]
+y_sort_enabled = false
+position = Vector2(152, 53)
+scale = Vector2(0.175, 0.175)
+collision_layer = 6
+script = ExtResource("12_e2gd")
+attack_range = 40.0
+attack_cooldown = 0.8
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy02_F" parent="Stage_03/Enemies" unique_id=3200000011 instance=ExtResource("12_e2tscn")]
+y_sort_enabled = false
+position = Vector2(175, 49)
+scale = Vector2(0.175, 0.175)
+collision_layer = 6
+script = ExtResource("12_e2gd")
+attack_range = 40.0
+attack_cooldown = 0.8
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Enemy02_G" parent="Stage_03/Enemies" unique_id=3200000012 instance=ExtResource("12_e2tscn")]
+y_sort_enabled = false
+position = Vector2(200, 51)
+scale = Vector2(0.175, 0.175)
+collision_layer = 6
+script = ExtResource("12_e2gd")
+attack_range = 40.0
+attack_cooldown = 0.8
+attack_duration = 0.35
+fatigue_meter = 0.0
+fatigued = false
+
+[node name="Pickups" type="Node2D" parent="Stage_03" unique_id=4400000001]
+
+[node name="Cheese01" parent="Stage_03/Pickups" unique_id=4400000002 instance=ExtResource("13_chztscn")]
+position = Vector2(50, 50)
+scale = Vector2(0.25, 0.25)
+
+[node name="Cheese02" parent="Stage_03/Pickups" unique_id=4400000003 instance=ExtResource("13_chztscn")]
+position = Vector2(180, 48)
+scale = Vector2(0.25, 0.25)
+
+[node name="Cheese03" parent="Stage_03/Pickups" unique_id=4400000004 instance=ExtResource("13_chztscn")]
+position = Vector2(270, 50)
+scale = Vector2(0.25, 0.25)
+
+[node name="Cheese04" parent="Stage_03/Pickups" unique_id=4400000005 instance=ExtResource("13_chztscn")]
+position = Vector2(370, 48)
+scale = Vector2(0.25, 0.25)
+
+[node name="Cheese05" parent="Stage_03/Pickups" unique_id=4400000006 instance=ExtResource("13_chztscn")]
+position = Vector2(460, 50)
+scale = Vector2(0.25, 0.25)
+
+[node name="Cheese06" parent="Stage_03/Pickups" unique_id=4400000007 instance=ExtResource("13_chztscn")]
+position = Vector2(540, 48)
+scale = Vector2(0.25, 0.25)
+
+[node name="Boss01" parent="Stage_03" unique_id=3200000010 instance=ExtResource("7_4srsv")]
+position = Vector2(350, 43)
+scale = Vector2(0.075, 0.075)
+attack_range = 130.0
+attack_cooldown = 2.0
+attack_duration = 0.7
+fatigue_meter = 0.0
+fatigued = false
+stomp_chance = 0.75
+has_slam = true
+slam_damage_multiplier = 2.0
+damage = 35
+speed = 75.0
+health = 200
+max_health = 200
+
+[node name="Boss02" parent="Stage_03" unique_id=3200000013 instance=ExtResource("7_4srsv")]
+position = Vector2(460, 43)
+scale = Vector2(0.075, 0.075)
+attack_range = 130.0
+attack_cooldown = 2.0
+attack_duration = 0.7
+fatigue_meter = 0.0
+fatigued = false
+stomp_chance = 0.75
+has_slam = true
+slam_damage_multiplier = 2.0
+damage = 35
+speed = 75.0
+health = 200
+max_health = 200
+
+[node name="Boss03" parent="Stage_03" unique_id=3200000014 instance=ExtResource("7_4srsv")]
+position = Vector2(550, 43)
+scale = Vector2(0.075, 0.075)
+attack_range = 130.0
+attack_cooldown = 2.0
+attack_duration = 0.7
+fatigue_meter = 0.0
+fatigued = false
+stomp_chance = 0.75
+has_slam = true
+slam_damage_multiplier = 2.0
+damage = 35
+speed = 75.0
+health = 200
+max_health = 200
 
 [node name="Camera" type="Camera2D" parent="." unique_id=2107624244]
 position = Vector2(360, -121)

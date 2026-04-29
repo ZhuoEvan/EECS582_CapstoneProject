@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://brj1vbf4me2jn" path="res://Assets/rat_boss_walk.png" id="4_boss01"]
 [ext_resource type="Texture2D" uid="uid://c2s0c1fj7enw7" path="res://Assets/rat_boss_scream.png" id="5_boss01"]
 [ext_resource type="Texture2D" uid="uid://b3vcw2ojh8txl" path="res://Assets/rat_boss_stomp.png" id="6_boss01"]
+[ext_resource type="Texture2D" uid="uid://bhioyj3k4320f" path="res://Assets/boss/bossslam.png" id="7_boss01"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_boss01"]
 radius = 40.0
@@ -284,10 +285,78 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
 
+[sub_resource type="Animation" id="Animation_slam_boss"]
+resource_name = "heavy_attack"
+length = 0.65
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_boss01")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.13, 0.26, 0.39, 0.52),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DamageEmitter:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.35, 0.60),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0.65),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_action_complete"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_boss01"]
 _data = {
 &"RESET": SubResource("Animation_reset_boss"),
 &"death": SubResource("Animation_death_boss"),
+&"heavy_attack": SubResource("Animation_slam_boss"),
 &"hurt": SubResource("Animation_hurt_boss"),
 &"idle": SubResource("Animation_idle_boss"),
 &"light_attack": SubResource("Animation_stomp_boss"),

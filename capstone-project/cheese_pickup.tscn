@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ch0pickup01sc"]
+
+[ext_resource type="Script" path="res://cheese_pickup.gd" id="1_chzgd"]
+[ext_resource type="Texture2D" uid="uid://bt4udj0y8j50i" path="res://Assets/chzblock_powerup.png" id="2_chztex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_chz"]
+size = Vector2(26, 20)
+
+[node name="CheesePickup" type="Area2D" unique_id=4100000001]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_chzgd")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=4100000002]
+texture = ExtResource("2_chztex")
+hframes = 5
+frame = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=4100000003]
+position = Vector2(-2, 0)
+shape = SubResource("RectangleShape2D_chz")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
